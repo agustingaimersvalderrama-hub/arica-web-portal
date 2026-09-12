@@ -3,833 +3,823 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arica Chile Roleplay - Portal Web</title>
-    
+    <title>Arica Chile Roleplay - Portal Oficial</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
-                        mono: ['Courier New', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-    
     <style>
         body {
-            background-color: #000;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), url('2364562937_2534724415_1788711361325.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: #e2e8f0;
-            margin: 0;
-            min-height: 100vh;
-        }
-        
-        /* Tema de Cristal Minimalista Blanco */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .glass-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        .glass-input:focus {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.8);
-            outline: none;
-            box-shadow: 0 0 10px rgba(255,255,255,0.1);
-        }
-
-        .glass-button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            backdrop-filter: blur(4px);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .glass-button:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 1);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,255,255,0.1);
-        }
-
-        .glass-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Animaciones de Pestañas */
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Navegación */
-        .nav-btn {
-            position: relative;
-        }
-        
-        .nav-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background-color: white;
-            transition: width 0.3s ease;
-        }
-
-        .nav-btn.active {
-            color: white;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        .nav-btn.active::after {
-            width: 100%;
-        }
-
-        /* Notificaciones customizadas */
-        #notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            transform: translateX(150%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        #notification.show {
-            transform: translateX(0);
-        }
-
-        /* Tarjeta de crédito UI */
-        .credit-card {
-            background-color: #111;
-            overflow: hidden;
-        }
-        .cc-bg {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
             background-image: url('2364562937_2534724415_1788711361325.jpg');
             background-size: cover;
             background-position: center;
-            opacity: 0.4;
-            z-index: 0;
+            background-attachment: fixed;
         }
-        .cc-gradient {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(255,255,255,0.1) 100%);
-            z-index: 1;
+        .glass-bg {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .glass-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        .glass-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
         }
     </style>
 </head>
-<body class="flex flex-col font-sans antialiased">
+<body class="min-h-screen text-white font-sans flex flex-col justify-between">
 
-    <header class="glass-panel sticky top-0 z-40 border-b border-white/20 rounded-none bg-black/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex items-center gap-4">
-                    <img src="arica logo.png" alt="Arica RP Logo" class="h-14 w-14 rounded-full border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.5)] object-cover bg-black">
-                    <div>
-                        <h1 class="text-xl font-bold tracking-tight text-white uppercase">Arica Chile <span class="text-white/70 font-light">RP</span></h1>
-                        <p class="text-xs text-white/50 tracking-widest uppercase">Portal Oficial</p>
-                    </div>
-                </div>
-
-                <!-- Desktop Nav -->
-                <nav class="hidden md:flex space-x-6 h-full items-center">
-                    <button onclick="switchTab('identidad')" id="btn-identidad" class="nav-btn active h-full px-3 text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center">
-                        <i class="fas fa-id-card mr-2"></i> Identidad
-                    </button>
-                    <button onclick="switchTab('economia')" id="btn-economia" class="nav-btn h-full px-3 text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center">
-                        <i class="fas fa-university mr-2"></i> Economía
-                    </button>
-                    <button onclick="switchTab('concesionario')" id="btn-concesionario" class="nav-btn h-full px-3 text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center">
-                        <i class="fas fa-car mr-2"></i> Concesionario
-                    </button>
-                    <button onclick="switchTab('staff')" id="btn-staff" class="nav-btn h-full px-3 text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center border-l border-white/20 pl-6 ml-2">
-                        <i class="fas fa-shield-alt mr-2 text-white/50"></i> Staff
-                    </button>
-                </nav>
-
-                <!-- Status -->
-                <div class="hidden sm:flex items-center gap-3 pl-4">
-                    <div class="text-right">
-                        <div class="text-sm font-bold text-white uppercase" id="nav-username">Invitado</div>
-                        <div class="text-xs text-white/50 tracking-widest" id="nav-status">Sin Registro</div>
-                    </div>
+    <!-- HEADER / NAVIGATION -->
+    <header class="glass-bg sticky top-0 z-50 px-4 py-3 shadow-lg">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- LOGO & TITLE -->
+            <div class="flex items-center space-x-3">
+                <img src="arica logo.png" alt="Arica RP Logo" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+                <div>
+                    <h1 class="text-lg font-extrabold tracking-wider text-white">ARICA CHILE RP</h1>
+                    <p class="text-xs text-gray-200">Portal Ciudadano y Administrativo</p>
                 </div>
             </div>
-        </div>
-        
-        <!-- Mobile Nav -->
-        <div class="md:hidden border-t border-white/20 flex justify-around bg-black/60 backdrop-blur-md">
-             <button onclick="switchTab('identidad')" id="btn-identidad-mobile" class="nav-btn active flex-1 py-4 text-xs font-medium text-white flex flex-col items-center gap-1">
-                <i class="fas fa-id-card text-lg"></i> ID
-            </button>
-            <button onclick="switchTab('economia')" id="btn-economia-mobile" class="nav-btn flex-1 py-4 text-xs font-medium text-gray-400 flex flex-col items-center gap-1">
-                <i class="fas fa-university text-lg"></i> Banco
-            </button>
-            <button onclick="switchTab('concesionario')" id="btn-concesionario-mobile" class="nav-btn flex-1 py-4 text-xs font-medium text-gray-400 flex flex-col items-center gap-1">
-                <i class="fas fa-car text-lg"></i> Autos
-            </button>
-            <button onclick="switchTab('staff')" id="btn-staff-mobile" class="nav-btn flex-1 py-4 text-xs font-medium text-gray-400 flex flex-col items-center gap-1">
-                <i class="fas fa-shield-alt text-lg"></i> Staff
-            </button>
+
+            <!-- NAVIGATION TABS -->
+            <nav class="flex flex-wrap justify-center gap-2">
+                <button onclick="switchTab('identity')" id="btn-identity" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">🆔 Identidad</button>
+                <button onclick="switchTab('economy')" id="btn-economy" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">💰 Banco</button>
+                <button onclick="switchTab('dealership')" id="btn-dealership" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">🚗 Concesionario</button>
+                <button onclick="switchTab('store')" id="btn-store" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">🛒 Tienda</button>
+                <button onclick="switchTab('cellphone')" id="btn-cellphone" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm hidden" id="nav-cell">📱 Celular</button>
+                <button onclick="switchTab('police')" id="btn-police" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">👮‍♂️ Policial</button>
+                <button onclick="switchTab('staff')" id="btn-staff" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">⚙️ Staff</button>
+            </nav>
         </div>
     </header>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full relative z-10">
-        
-        <section id="identidad" class="tab-content active">
-            <!-- Formulario DNI -->
-            <div id="dni-form-container" class="max-w-xl mx-auto mt-4">
-                <div class="glass-panel p-8 sm:p-10 rounded-3xl text-center relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
-                        <img src="arica logo.png" class="w-40 h-40 object-cover rounded-full grayscale">
-                    </div>
-                    
-                    <div class="relative z-10 mb-8">
-                        <h2 class="text-3xl font-bold text-white mb-2 uppercase tracking-widest">Crear Identidad</h2>
-                        <p class="text-white/60 text-sm">Bienvenido a Arica. Registra tu DNI para recibir el bono inicial de <strong class="text-white font-mono">$800.000 CLP</strong>.</p>
-                    </div>
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
 
-                    <form id="registro-dni" class="space-y-5 text-left relative z-10">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                            <div>
-                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Nombre</label>
-                                <input type="text" id="reg-nombre" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="Ej. Juan">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Apellido</label>
-                                <input type="text" id="reg-apellido" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="Ej. Pérez">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                            <div>
-                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Edad</label>
-                                <input type="number" id="reg-edad" min="18" max="90" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="18+">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Género</label>
-                                <select id="reg-genero" required class="glass-input w-full px-4 py-3 rounded-xl text-sm appearance-none bg-black/50">
-                                    <option value="" disabled selected>Elegir</option>
-                                    <option value="M">Masculino</option>
-                                    <option value="F">Femenino</option>
-                                    <option value="O">Otro</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Nacionalidad</label>
-                                <input type="text" id="reg-nacionalidad" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="Chileno">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="glass-button w-full py-4 rounded-xl text-sm uppercase tracking-widest font-bold mt-4 flex justify-center items-center gap-2">
-                            <i class="fas fa-fingerprint"></i> Emitir DNI
-                        </button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Carnet DNI -->
-            <div id="dni-card-container" style="display: none;" class="max-w-3xl mx-auto">
-                <div class="glass-panel p-2 rounded-2xl relative overflow-hidden">
-                    <div class="absolute inset-0 bg-white/5 pointer-events-none"></div>
-                    <div class="bg-black/40 rounded-xl p-8 flex flex-col md:flex-row gap-8 relative z-10 border border-white/10 backdrop-blur-md">
-                        <div class="flex-shrink-0 flex flex-col items-center justify-center space-y-4">
-                            <div class="w-36 h-36 rounded-xl border-2 border-white/30 overflow-hidden relative shadow-2xl">
-                                <img src="https://ui-avatars.com/api/?name=User&background=000000&color=fff&size=150" id="dni-avatar" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 border border-white/20 rounded-xl"></div>
-                            </div>
-                            <img src="arica logo.png" class="w-12 h-12 object-cover rounded-full opacity-80 mt-2">
-                        </div>
-                        <div class="flex-grow">
-                            <div class="border-b border-white/20 pb-4 mb-6">
-                                <h3 class="text-3xl font-bold text-white uppercase tracking-widest" id="dni-fullname">---</h3>
-                                <p class="text-xs text-white/50 font-light mt-1 tracking-widest uppercase">República de Chile - DNI</p>
-                            </div>
-                            <div class="grid grid-cols-2 gap-6">
-                                <div>
-                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">RUN</p>
-                                    <p class="text-lg font-mono text-white" id="dni-run">---</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">Nacionalidad</p>
-                                    <p class="text-lg text-white uppercase" id="dni-nac">---</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">Edad</p>
-                                    <p class="text-lg text-white" id="dni-age">---</p>
-                                </div>
-                                <div>
-                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">Género</p>
-                                    <p class="text-lg text-white" id="dni-gender">---</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="economia" class="tab-content">
-            <h2 class="text-2xl font-bold mb-8 text-white uppercase tracking-widest text-center"><i class="fas fa-university text-white/50 mr-2"></i> Banco Digital Arica</h2>
-            
-            <div class="flex flex-col lg:flex-row gap-8 justify-center items-start">
-                
-                <!-- Tarjeta Arica Banco -->
-                <div class="w-full lg:w-auto flex justify-center">
-                    <div class="credit-card relative w-full max-w-md h-56 rounded-2xl border border-white/40 shadow-[0_10px_40px_rgba(0,0,0,0.8)] p-6 flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
-                        <div class="cc-bg"></div>
-                        <div class="cc-gradient"></div>
-                        
-                        <div class="relative z-10 flex justify-between items-start">
-                            <div class="flex items-center gap-3">
-                                <img src="arica logo.png" class="w-10 h-10 rounded-full border border-white/50 object-cover bg-black shadow-lg">
-                                <span class="text-white font-bold tracking-widest uppercase text-sm drop-shadow-md">Arica Banco</span>
-                            </div>
-                            <i class="fas fa-wifi text-white/70 rotate-90 text-lg"></i>
-                        </div>
-                        
-                        <div class="relative z-10 mt-4">
-                            <div class="w-12 h-8 bg-gradient-to-br from-white/40 to-white/10 rounded border border-white/30 mb-3 backdrop-blur-sm"></div>
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-xs text-white/70 uppercase tracking-widest drop-shadow-md">Saldo Disponible</p>
-                                <i class="fab fa-cc-visa text-3xl text-white/80"></i>
-                            </div>
-                            <div class="text-3xl text-white font-mono tracking-wider drop-shadow-lg font-bold" id="card-balance">$0</div>
-                            <div class="flex justify-between items-end mt-4">
-                                <div class="text-white/90 uppercase text-sm tracking-widest font-medium drop-shadow-md" id="card-name">SIN REGISTRO</div>
-                                <div class="text-white/70 text-xs font-mono drop-shadow-md">12/30</div>
-                            </div>
-                        </div>
-                    </div>
+        <!---------------- TAB 1: IDENTIDAD (DNI & 2DO PJ) ---------------->
+        <div id="tab-identity" class="tab-content space-y-6">
+            <div class="glass-card p-6 md:p-8 rounded-2xl shadow-2xl">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-white">Registro de Identidad Ciudadana</h2>
+                    <p class="text-sm text-gray-200 mt-1">Crea tu documentación oficial para ingresar legalmente a Arica Chile Roleplay.</p>
                 </div>
 
-                <!-- Opciones Bancarias -->
-                <div class="w-full lg:w-1/2 glass-panel p-6 rounded-2xl flex flex-col gap-4">
-                    <h3 class="text-white uppercase tracking-widest text-sm border-b border-white/20 pb-3 mb-2">Operaciones</h3>
-                    
-                    <button onclick="openBankModal('transferir')" class="glass-button w-full p-4 rounded-xl flex items-center justify-between group">
-                        <div class="flex items-center gap-4">
-                            <div class="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                                <i class="fas fa-exchange-alt text-white"></i>
-                            </div>
-                            <div class="text-left">
-                                <p class="text-white font-bold text-sm">Transferir</p>
-                                <p class="text-white/50 text-xs">Enviar dinero a otro ciudadano</p>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right text-white/30 group-hover:text-white transition-colors"></i>
-                    </button>
-
-                    <button onclick="openBankModal('depositar')" class="glass-button w-full p-4 rounded-xl flex items-center justify-between group">
-                        <div class="flex items-center gap-4">
-                            <div class="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                                <i class="fas fa-arrow-down text-white"></i>
-                            </div>
-                            <div class="text-left">
-                                <p class="text-white font-bold text-sm">Depositar</p>
-                                <p class="text-white/50 text-xs">Ingresar efectivo a tu cuenta</p>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right text-white/30 group-hover:text-white transition-colors"></i>
-                    </button>
-
-                    <button onclick="openBankModal('retirar')" class="glass-button w-full p-4 rounded-xl flex items-center justify-between group">
-                        <div class="flex items-center gap-4">
-                            <div class="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
-                                <i class="fas fa-arrow-up text-white"></i>
-                            </div>
-                            <div class="text-left">
-                                <p class="text-white font-bold text-sm">Retirar</p>
-                                <p class="text-white/50 text-xs">Sacar efectivo del cajero</p>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-right text-white/30 group-hover:text-white transition-colors"></i>
-                    </button>
-                    
-                    <div class="mt-4 p-4 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center">
-                        <span class="text-xs text-white/50 uppercase tracking-widest">Efectivo en mano</span>
-                        <span class="text-lg text-white font-mono font-bold" id="cash-balance">$0</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="concesionario" class="tab-content">
-            <div class="text-center mb-10">
-                <h2 class="text-2xl font-bold text-white uppercase tracking-widest"><i class="fas fa-car-alt text-white/50 mr-2"></i> Importaciones Arica</h2>
-                <p class="text-sm text-white/50 mt-2">Catálogo de vehículos disponibles</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="dealership-grid">
-                <!-- Generado por JS -->
-            </div>
-        </section>
-
-        <section id="staff" class="tab-content">
-            <!-- Login Staff -->
-            <div id="staff-login" class="max-w-md mx-auto mt-10 glass-panel p-8 rounded-3xl text-center border-t-4 border-t-white">
-                <i class="fas fa-shield-alt text-4xl text-white mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]"></i>
-                <h2 class="text-xl font-bold text-white uppercase tracking-widest mb-6">Portal Administrativo</h2>
-                
-                <form id="form-staff-login" class="space-y-4 text-left">
-                    <div>
-                        <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Usuario</label>
-                        <input type="text" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" value="Admin" readonly>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Contraseña</label>
-                        <input type="password" id="staff-pass" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="••••••••">
-                    </div>
-                    <button type="submit" class="glass-button w-full py-3 rounded-xl text-sm font-bold uppercase tracking-widest mt-2">
-                        Acceder
-                    </button>
-                </form>
-            </div>
-
-            <!-- Panel Staff (Dashboard) -->
-            <div id="staff-dashboard" class="hidden">
-                <div class="flex justify-between items-center mb-8 border-b border-white/20 pb-4">
-                    <h2 class="text-2xl font-bold text-white uppercase tracking-widest"><i class="fas fa-cogs text-white/50 mr-2"></i> Panel de Control</h2>
-                    <button onclick="logoutStaff()" class="text-xs text-white/50 hover:text-white uppercase tracking-widest"><i class="fas fa-sign-out-alt"></i> Salir</button>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <!-- Control Economía -->
-                    <div class="glass-panel p-6 rounded-2xl">
-                        <h3 class="text-white uppercase tracking-widest text-sm font-bold border-b border-white/20 pb-3 mb-5"><i class="fas fa-money-bill-wave mr-2"></i> Modificar Economía Local</h3>
-                        
-                        <div class="bg-black/30 p-4 rounded-xl border border-white/10 mb-4">
-                            <p class="text-xs text-white/50 uppercase tracking-widest mb-1">Jugador Actual</p>
-                            <p class="text-lg text-white font-bold" id="staff-target-name">Nadie conectado</p>
-                            <p class="text-xs text-white/70 font-mono" id="staff-target-balance">Banco: $0</p>
-                        </div>
-
-                        <div class="flex gap-2 mb-4">
-                            <input type="number" id="staff-money-input" class="glass-input flex-1 px-4 py-2 rounded-xl text-sm" placeholder="Monto ej. 50000">
-                        </div>
-                        <div class="flex gap-2">
-                            <button onclick="staffModifyMoney('add')" class="glass-button flex-1 py-2 rounded-xl text-sm font-bold flex justify-center items-center gap-2">
-                                <i class="fas fa-plus"></i> Dar
-                            </button>
-                            <button onclick="staffModifyMoney('remove')" class="glass-button flex-1 py-2 rounded-xl text-sm font-bold flex justify-center items-center gap-2">
-                                <i class="fas fa-minus"></i> Quitar
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Control Concesionario -->
-                    <div class="glass-panel p-6 rounded-2xl">
-                        <h3 class="text-white uppercase tracking-widest text-sm font-bold border-b border-white/20 pb-3 mb-5"><i class="fas fa-car mr-2"></i> Gestionar Concesionario</h3>
-                        
-                        <form id="form-add-car" class="space-y-3 mb-6 bg-black/30 p-4 rounded-xl border border-white/10">
-                            <p class="text-xs text-white/50 uppercase tracking-widest mb-2 border-b border-white/10 pb-1">Agregar Vehículo</p>
-                            <div>
-                                <input type="text" id="car-name" required class="glass-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Nombre del vehículo (Ej. Zentorno)">
-                            </div>
-                            <div class="grid grid-cols-2 gap-2">
-                                <input type="number" id="car-price" required class="glass-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Precio ($)">
-                                <input type="text" id="car-img" required class="glass-input w-full px-3 py-2 rounded-lg text-xs" placeholder="URL Imagen">
-                            </div>
-                            <button type="submit" class="glass-button w-full py-2 rounded-lg text-xs font-bold uppercase">
-                                Añadir al catálogo
-                            </button>
-                        </form>
-
+                <!-- FORMULARIO DE REGISTRO -->
+                <div id="dni-form-container" class="space-y-4 max-w-xl mx-auto">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <p class="text-xs text-white/50 uppercase tracking-widest mb-2 border-b border-white/10 pb-1">Catálogo Actual</p>
-                            <div id="staff-car-list" class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
-                                <!-- Generado por JS -->
-                            </div>
+                            <label class="block text-xs font-medium text-gray-200 mb-1">Nombre</label>
+                            <input type="text" id="char-name" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ej. Ignacio">
                         </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-200 mb-1">Apellido</label>
+                            <input type="text" id="char-lastname" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ej. Rojas">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-200 mb-1">Edad</label>
+                            <input type="number" id="char-age" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ej. 25">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-200 mb-1">Género</label>
+                            <select id="char-gender" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50 bg-slate-900/80">
+                                <option value="Masculino" class="bg-slate-900">Masculino</option>
+                                <option value="Femenino" class="bg-slate-900">Femenino</option>
+                                <option value="Otro" class="bg-slate-900">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-200 mb-1">Nacionalidad</label>
+                        <input type="text" id="char-nacionality" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50" value="Chilena">
+                    </div>
+                    <button onclick="registerCharacter()" class="w-full glass-btn py-3 rounded-xl font-bold text-sm text-white tracking-wide shadow-lg mt-4">
+                        Emitir Documento de Identidad ($800.000 Iniciales)
+                    </button>
+                </div>
+
+                <!-- TARJETAS DE DNI GENERADAS -->
+                <div id="dni-display-container" class="mt-8 space-y-6 hidden">
+                    <h3 class="text-lg font-semibold text-center text-white border-b border-white/20 pb-2">Tus Ciudadanos Registrados</h3>
+                    <div id="dni-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Se inyectan dinámicamente los DNIs -->
+                    </div>
+                    <div class="text-center pt-2" id="add-pj-wrapper">
+                        <button onclick="showNewDniForm()" class="glass-btn px-6 py-2.5 rounded-xl text-sm font-semibold text-white">
+                            + Crear 2do Personaje (Nuevo DNI)
+                        </button>
                     </div>
                 </div>
             </div>
-        </section>
-
-    </main>
-
-    
-    <!-- Modal Banco -->
-    <div id="bank-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center backdrop-blur-md">
-        <div class="glass-panel p-8 rounded-2xl w-full max-w-sm text-center border-t-2 border-t-white">
-            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4 border border-white/30">
-                <i id="bm-icon" class="fas fa-exchange-alt text-white text-xl"></i>
-            </div>
-            <h3 id="bm-title" class="text-lg text-white uppercase tracking-widest font-bold mb-1">Acción</h3>
-            <p id="bm-desc" class="text-xs text-white/50 mb-6">Detalle de la operación</p>
-            
-            <input type="number" id="bm-input" class="glass-input w-full p-4 rounded-xl mb-6 text-center text-lg font-mono font-bold" placeholder="$0">
-            
-            <div class="flex gap-4">
-                <button onclick="closeBankModal()" class="glass-button flex-1 py-3 rounded-xl text-sm uppercase tracking-widest">Cancelar</button>
-                <button id="bm-confirm" class="glass-button flex-1 py-3 rounded-xl border-white font-bold text-white text-sm uppercase tracking-widest bg-white/10">Confirmar</button>
-            </div>
         </div>
-    </div>
 
-    <!-- Notificación -->
-    <div id="notification" class="glass-panel p-4 rounded-xl border-l-2 border-l-white flex items-center gap-4 bg-black/60">
-        <div class="bg-white/20 w-8 h-8 rounded-full flex items-center justify-center text-white">
-            <i class="fas fa-check text-sm"></i>
-        </div>
-        <div>
-            <p id="notif-msg" class="text-white text-xs tracking-wide">Acción completada.</p>
-        </div>
-    </div>
-
-    <script>
-        // --- ESTADO DE LA APLICACIÓN ---
-        let appState = {
-            user: {
-                name: 'INVITADO',
-                fullName: 'Invitado',
-                bank: 0,
-                cash: 0,
-                registered: false
-            },
-            isStaff: false,
-            cars: [
-                { id: 1, name: 'Pegassi Zentorno', price: 8500000, img: 'https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=800&auto=format&fit=crop' },
-                { id: 2, name: 'Karin Sultan', price: 1200000, img: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=800&auto=format&fit=crop' },
-                { id: 3, name: 'Shitzu Hakuchou', price: 650000, img: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=800&auto=format&fit=crop' }
-            ],
-            currentBankAction: null
-        };
-
-        // Utilidad: Formatear Moneda
-        const formatMoney = (amount) => {
-            return '$' + amount.toLocaleString('es-CL');
-        };
-
-        // --- SISTEMA DE PESTAÑAS ---
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active', 'text-white');
-                btn.classList.add('text-gray-400');
-            });
-
-            document.getElementById(tabId).classList.add('active');
-            
-            // Activar botones (Desktop y Mobile)
-            const dBtn = document.getElementById('btn-' + tabId);
-            if(dBtn) { dBtn.classList.add('active', 'text-white'); dBtn.classList.remove('text-gray-400'); }
-            
-            const mBtn = document.getElementById('btn-' + tabId + '-mobile');
-            if(mBtn) { mBtn.classList.add('active', 'text-white'); mBtn.classList.remove('text-gray-400'); }
-        }
-
-        function showNotification(message) {
-            const notif = document.getElementById('notification');
-            document.getElementById('notif-msg').textContent = message;
-            notif.classList.add('show');
-            setTimeout(() => notif.classList.remove('show'), 3500);
-        }
-
-        // --- IDENTIDAD Y REGISTRO ---
-        document.getElementById('registro-dni').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nombre = document.getElementById('reg-nombre').value;
-            const apellido = document.getElementById('reg-apellido').value;
-            const fullName = `${nombre} ${apellido}`;
-            
-            // Generar Datos Falsos
-            const runStr = `${Math.floor(10+Math.random()*15)}.${Math.floor(100+Math.random()*899)}.${Math.floor(100+Math.random()*899)}-${Math.floor(Math.random()*10)}`;
-            
-            // Actualizar Estado
-            appState.user.name = (nombre.charAt(0) + ' ' + apellido).toUpperCase();
-            appState.user.fullName = fullName;
-            appState.user.bank = 800000;
-            appState.user.registered = true;
-
-            // Renderizar Carnet
-            document.getElementById('dni-fullname').textContent = fullName;
-            document.getElementById('dni-run').textContent = runStr;
-            document.getElementById('dni-age').textContent = document.getElementById('reg-edad').value;
-            document.getElementById('dni-gender').textContent = document.getElementById('reg-genero').value === 'M' ? 'Masculino' : (document.getElementById('reg-genero').value === 'F' ? 'Femenino' : 'Otro');
-            document.getElementById('dni-nac').textContent = document.getElementById('reg-nacionalidad').value;
-            document.getElementById('dni-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(nombre)}+${encodeURIComponent(apellido)}&background=000000&color=fff&size=150`;
-
-            // Actualizar Vistas Generales
-            document.getElementById('dni-form-container').style.display = 'none';
-            document.getElementById('dni-card-container').style.display = 'block';
-            
-            document.getElementById('nav-username').textContent = nombre;
-            document.getElementById('nav-status').textContent = 'Ciudadano';
-            document.getElementById('nav-status').classList.remove('text-white/50');
-            document.getElementById('nav-status').classList.add('text-white');
-
-            updateEconomyUI();
-            showNotification(`DNI emitido. Recibiste $800.000 CLP de bono.`);
-        });
-
-        // --- ECONOMÍA (BANCO DIGITAL) ---
-        function updateEconomyUI() {
-            document.getElementById('card-balance').textContent = formatMoney(appState.user.bank);
-            document.getElementById('card-name').textContent = appState.user.name;
-            document.getElementById('cash-balance').textContent = formatMoney(appState.user.cash);
-            
-            // Actualizar vista del staff si está conectado
-            document.getElementById('staff-target-name').textContent = appState.user.registered ? appState.user.fullName : 'Sin registrar';
-            document.getElementById('staff-target-balance').textContent = `Banco: ${formatMoney(appState.user.bank)} | Efectivo: ${formatMoney(appState.user.cash)}`;
-        }
-
-        function openBankModal(action) {
-            if(!appState.user.registered) {
-                showNotification("Debes registrar tu DNI primero.");
-                return;
-            }
-            appState.currentBankAction = action;
-            const modal = document.getElementById('bank-modal');
-            const title = document.getElementById('bm-title');
-            const desc = document.getElementById('bm-desc');
-            const icon = document.getElementById('bm-icon');
-            const input = document.getElementById('bm-input');
-
-            input.value = '';
-            
-            if(action === 'transferir') {
-                title.textContent = 'Transferencia';
-                desc.textContent = 'Ingresa el monto a transferir de tu cuenta bancaria.';
-                icon.className = 'fas fa-exchange-alt text-white text-xl';
-            } else if (action === 'depositar') {
-                title.textContent = 'Depositar Efectivo';
-                desc.textContent = 'Ingresa el monto en efectivo que deseas guardar en el banco.';
-                icon.className = 'fas fa-arrow-down text-white text-xl';
-            } else if (action === 'retirar') {
-                title.textContent = 'Retirar Efectivo';
-                desc.textContent = 'Ingresa el monto a retirar de tu cuenta bancaria.';
-                icon.className = 'fas fa-arrow-up text-white text-xl';
-            }
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            input.focus();
-        }
-
-        function closeBankModal() {
-            const modal = document.getElementById('bank-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-            appState.currentBankAction = null;
-        }
-
-        document.getElementById('bm-confirm').addEventListener('click', () => {
-            const amount = parseInt(document.getElementById('bm-input').value);
-            if(isNaN(amount) || amount <= 0) {
-                showNotification("Monto inválido.");
-                return;
-            }
-
-            if(appState.currentBankAction === 'transferir') {
-                if(amount > appState.user.bank) return showNotification("Fondos insuficientes en el banco.");
-                appState.user.bank -= amount;
-                showNotification(`Transferencia de ${formatMoney(amount)} exitosa.`);
-            } else if(appState.currentBankAction === 'depositar') {
-                if(amount > appState.user.cash) return showNotification("No tienes suficiente efectivo.");
-                appState.user.cash -= amount;
-                appState.user.bank += amount;
-                showNotification(`Depositaste ${formatMoney(amount)}.`);
-            } else if(appState.currentBankAction === 'retirar') {
-                if(amount > appState.user.bank) return showNotification("Fondos insuficientes en el banco.");
-                appState.user.bank -= amount;
-                appState.user.cash += amount;
-                showNotification(`Retiraste ${formatMoney(amount)}.`);
-            }
-
-            updateEconomyUI();
-            closeBankModal();
-        });
-
-
-        // --- CONCESIONARIO ---
-        function renderDealership() {
-            const grid = document.getElementById('dealership-grid');
-            grid.innerHTML = '';
-            
-            if(appState.cars.length === 0) {
-                grid.innerHTML = '<p class="text-white/50 col-span-full text-center py-10 uppercase tracking-widest text-xs">No hay vehículos en stock</p>';
-                return;
-            }
-
-            appState.cars.forEach(car => {
-                grid.innerHTML += `
-                    <div class="glass-panel rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300 border border-white/10 flex flex-col">
-                        <div class="h-48 overflow-hidden relative bg-black">
-                            <img src="${car.img}" alt="${car.name}" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" onerror="this.src='https://placehold.co/600x400/111/fff?text=No+Image'">
-                        </div>
-                        <div class="p-6 flex-grow flex flex-col justify-between">
+        <!---------------- TAB 2: BANCO (ECONOMÍA Y TARJETA) ---------------->
+        <div id="tab-economy" class="tab-content hidden space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- SALDO Y MOVIMIENTOS -->
+                <div class="glass-card p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-white/20 pb-4 mb-4">
                             <div>
-                                <h3 class="text-lg font-bold text-white mb-1 uppercase tracking-wider">${car.name}</h3>
-                                <p class="text-[10px] text-white/50 uppercase tracking-widest mb-4">Stock Limitado</p>
+                                <h3 class="text-sm font-medium text-gray-300">Banco Digital Arica</h3>
+                                <p class="text-2xl font-black text-white mt-1" id="bank-balance">$800.000 CLP</p>
                             </div>
-                            <div class="flex justify-between items-end border-t border-white/10 pt-4">
-                                <div>
-                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">Valor</p>
-                                    <p class="text-xl font-bold font-mono text-white">${formatMoney(car.price)}</p>
-                                </div>
-                                <button onclick="buyCar(${car.price}, '${car.name}')" class="glass-button px-4 py-2 rounded-lg text-xs font-bold uppercase">
-                                    Comprar
+                            <span class="px-3 py-1 bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs rounded-full font-semibold">Cuenta Activa</span>
+                        </div>
+                        <h4 class="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Últimos Movimientos</h4>
+                        <div id="transaction-history" class="space-y-2 max-h-48 overflow-y-auto pr-1 text-sm">
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-white/5 border border-white/10 text-xs">
+                                <span class="text-gray-200">Bono de Bienvenida Inicial</span>
+                                <span class="text-emerald-400 font-bold">+ $800.000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/10 flex gap-2">
+                        <button onclick="simulateDeposit()" class="flex-1 glass-btn py-2 rounded-xl text-xs font-semibold">Simular Ingreso</button>
+                        <button onclick="simulateWithdraw()" class="flex-1 glass-btn py-2 rounded-xl text-xs font-semibold">Girar Dinero</button>
+                    </div>
+                </div>
+
+                <!-- TARJETA ARICA BANCO -->
+                <div class="glass-card p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center">
+                    <h3 class="text-sm font-semibold text-gray-200 mb-4 self-start">Tu Tarjeta de Débito</h3>
+                    
+                    <!-- DISEÑO DE TARJETA CON LA IMAGEN DE FONDO Y LOGO -->
+                    <div class="w-full max-w-sm h-52 rounded-2xl p-5 shadow-2xl relative overflow-hidden flex flex-col justify-between border border-white/30"
+                         style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.9)), url('2364562937_2534724415_1788711361325.jpg'); background-size: cover; background-position: center;">
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-bold tracking-widest uppercase text-white drop-shadow">Arica Banco</span>
+                            <img src="arica logo.png" class="w-8 h-8 rounded-full object-cover border border-white/60">
+                        </div>
+
+                        <div class="flex items-center space-x-3 my-auto">
+                            <div class="w-10 h-7 bg-amber-300/80 rounded-md border border-amber-500 flex items-center justify-center text-[9px] font-mono text-black font-bold">CHIP</div>
+                            <div class="text-lg font-mono tracking-widest text-white drop-shadow-md">•••• •••• •••• 4026</div>
+                        </div>
+
+                        <div class="flex justify-between items-end text-xs">
+                            <div>
+                                <p class="text-[9px] text-gray-300 uppercase">Titular</p>
+                                <p class="font-bold text-white tracking-wide uppercase" id="card-holder-name">REGISTRA TU DNI</p>
+                            </div>
+                            <div>
+                                <p class="text-[9px] text-gray-300 uppercase">Expira</p>
+                                <p class="font-bold text-white">08/30</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-gray-300 mt-4 text-center">Tarjeta oficial aceptada en todo el territorio de Arica Chile RP.</p>
+                </div>
+            </div>
+        </div>
+
+        <!---------------- TAB 3: CONCESIONARIO ---------------->
+        <div id="tab-dealership" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl shadow-xl">
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Concesionario de Vehículos</h2>
+                        <p class="text-xs text-gray-300">Adquiere automóviles para moverte por toda la ciudad de Arica.</p>
+                    </div>
+                    <div id="staff-dealership-badge" class="hidden">
+                        <span class="px-3 py-1 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs rounded-full">Modo Staff Activo</span>
+                    </div>
+                </div>
+
+                <!-- LISTA DE VEHÍCULOS -->
+                <div id="dealership-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Inyectado por JS -->
+                </div>
+            </div>
+        </div>
+
+        <!---------------- TAB 4: TIENDA (LICENCIAS & IPHONE 18) ---------------->
+        <div id="tab-store" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl shadow-xl">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-white">Tienda Oficial de Arica RP</h2>
+                    <p class="text-sm text-gray-300">Compra tus licencias oficiales y dispositivos tecnológicos exclusivos.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <!-- Item 1: Licencia Clase B -->
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between border border-white/20">
+                        <div>
+                            <div class="text-3xl text-center mb-2">🪪</div>
+                            <h3 class="font-bold text-white text-center">Licencia de Conducir Clase B</h3>
+                            <p class="text-xs text-gray-300 mt-2 text-center">Documento obligatorio para manejar automóviles legalmente en la vía pública.</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-emerald-400 font-bold text-sm">$45.000 CLP</span>
+                            <button onclick="buyStoreItem('Licencia Clase B', 45000, 'license')" class="glass-btn px-4 py-1.5 rounded-lg text-xs font-semibold">Comprar</button>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: iPhone 18 Pro Max -->
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between border border-white/20 bg-gradient-to-b from-slate-800/60 to-slate-900/80">
+                        <div>
+                            <div class="text-3xl text-center mb-2">📱</div>
+                            <h3 class="font-bold text-white text-center">iPhone 18 Pro Max</h3>
+                            <p class="text-xs text-gray-300 mt-2 text-center">Smartphone gama alta. Desbloquea acceso completo al Portal Celular y sus aplicaciones.</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-emerald-400 font-bold text-sm">$850.000 CLP</span>
+                            <button onclick="buyStoreItem('iPhone 18 Pro Max', 850000, 'phone')" class="glass-btn px-4 py-1.5 rounded-lg text-xs font-semibold">Comprar</button>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Set de Herramientas -->
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between border border-white/20">
+                        <div>
+                            <div class="text-3xl text-center mb-2">🔧</div>
+                            <h3 class="font-bold text-white text-center">Kit de Mecánica Rápida</h3>
+                            <p class="text-xs text-gray-300 mt-2 text-center">Herramientas esenciales para reparaciones de emergencia en ruta.</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
+                            <span class="text-emerald-400 font-bold text-sm">$30.000 CLP</span>
+                            <button onclick="buyStoreItem('Kit de Mecánica', 30000, 'item')" class="glass-btn px-4 py-1.5 rounded-lg text-xs font-semibold">Comprar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INVENTARIO DEL USUARIO -->
+                <div class="mt-8 pt-6 border-t border-white/20">
+                    <h3 class="text-sm font-semibold text-white mb-3">Tus Pertenencias y Licencias</h3>
+                    <div id="user-inventory" class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-white/10 rounded-lg text-xs text-gray-300 border border-white/10">Ningún objeto adquirido aún</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!---------------- TAB 5: PORTAL CELULAR (IPHONE INTERACTIVO) ---------------->
+        <div id="tab-cellphone" class="tab-content hidden space-y-6">
+            <div class="flex justify-center">
+                <!-- MARCO DE IPHONE -->
+                <div class="w-full max-w-sm glass-card rounded-[40px] p-4 shadow-2xl border-4 border-slate-700/80 relative overflow-hidden bg-slate-950/80">
+                    <!-- ISLA DINÁMICA / NOTCH -->
+                    <div class="w-28 h-5 bg-black rounded-full mx-auto mb-4 flex items-center justify-center">
+                        <div class="w-3 h-3 bg-slate-900 rounded-full mr-2"></div>
+                        <div class="w-2 h-2 bg-blue-900/60 rounded-full"></div>
+                    </div>
+
+                    <!-- PANTALLA DEL CELULAR -->
+                    <div id="phone-screen" class="min-h-[480px] flex flex-col justify-between text-white">
+                        <!-- PANTALLA DE INICIO (HOME) -->
+                        <div id="phone-home-view">
+                            <div class="text-center mb-4">
+                                <p class="text-xs text-gray-400 font-mono" id="phone-time">10:02 AM</p>
+                                <h3 class="text-sm font-bold mt-1 text-white">AricaPhone OS</h3>
+                            </div>
+                            
+                            <!-- GRILLA DE APPS -->
+                            <div class="grid grid-cols-3 gap-4 px-2 py-4">
+                                <button onclick="openPhoneApp('aricagram')" class="flex flex-col items-center group">
+                                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition">📸</div>
+                                    <span class="text-[10px] mt-1 text-gray-300 font-medium">AricaGram</span>
+                                </button>
+                                <button onclick="openPhoneApp('chat')" class="flex flex-col items-center group">
+                                    <div class="w-14 h-14 rounded-2xl bg-emerald-600 flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition">💬</div>
+                                    <span class="text-[10px] mt-1 text-gray-300 font-medium">Mensajes</span>
+                                </button>
+                                <button onclick="openPhoneApp('bank')" class="flex flex-col items-center group">
+                                    <div class="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition">💳</div>
+                                    <span class="text-[10px] mt-1 text-gray-300 font-medium">BancaApp</span>
+                                </button>
+                                <button onclick="openPhoneApp('emergency')" class="flex flex-col items-center group">
+                                    <div class="w-14 h-14 rounded-2xl bg-red-600 flex items-center justify-center text-xl shadow-md group-hover:scale-105 transition">🚨</div>
+                                    <span class="text-[10px] mt-1 text-gray-300 font-medium">Emergencia</span>
                                 </button>
                             </div>
                         </div>
+
+                        <!-- VISTA DE APLICACIÓN DINÁMICA -->
+                        <div id="phone-app-view" class="hidden flex-grow flex flex-col">
+                            <div class="flex items-center justify-between border-b border-white/20 pb-2 mb-3">
+                                <button onclick="closePhoneApp()" class="text-xs text-blue-400 font-semibold">← Volver</button>
+                                <span id="phone-app-title" class="text-xs font-bold text-white">App</span>
+                                <span></span>
+                            </div>
+                            <div id="phone-app-content" class="flex-grow overflow-y-auto text-xs space-y-2 pr-1">
+                                <!-- Contenido de app -->
+                            </div>
+                        </div>
+
+                        <!-- BARRA INFERIOR IPAD/IPHONE -->
+                        <div class="pt-3 border-t border-white/10 flex justify-between items-center text-[10px] text-gray-400 px-4">
+                            <span>📶 Arica 5G</span>
+                            <div class="w-24 h-1 bg-white/40 rounded-full cursor-pointer" onclick="openPhoneApp('home')"></div>
+                            <span>🔋 100%</span>
+                        </div>
                     </div>
-                `;
-            });
+                </div>
+            </div>
+        </div>
+
+        <!---------------- TAB 6: PORTAL POLICIAL ---------------->
+        <div id="tab-police" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl shadow-xl">
+                <div id="police-login-box" class="max-w-md mx-auto space-y-4 text-center">
+                    <div class="text-3xl mb-2">👮‍♂️</div>
+                    <h2 class="text-xl font-bold text-white">Acceso Restringido - Carabineros / PDI</h2>
+                    <p class="text-xs text-gray-300">Ingrese código de autorización policial para gestionar multas y antecedentes.</p>
+                    <input type="password" id="police-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-center" placeholder="Clave Policial">
+                    <button onclick="loginPolice()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-sm">Iniciar Sesión Policial</button>
+                    <p id="police-error" class="text-red-400 text-xs hidden">Clave incorrecta (Use: AricaPolice2026)</p>
+                </div>
+
+                <!-- PANEL DE POLICÍA ACTIVO -->
+                <div id="police-dashboard" class="hidden space-y-6">
+                    <div class="flex justify-between items-center border-b border-white/20 pb-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-white">Sistema Integrado Policial (SIP)</h2>
+                            <p class="text-xs text-gray-300">Control y registro de antecedentes ciudadanos.</p>
+                        </div>
+                        <button onclick="logoutPolice()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-red-300 border-red-400/40">Cerrar Sesión</button>
+                    </div>
+
+                    <!-- BUSCADOR DE CIUDADANOS -->
+                    <div class="flex gap-2">
+                        <input type="text" id="police-search-dni" class="glass-input flex-grow px-4 py-2 rounded-xl text-sm" placeholder="Buscar por Nombre o DNI...">
+                        <button onclick="searchCitizenPolice()" class="glass-btn px-5 py-2 rounded-xl text-sm font-semibold">Buscar</button>
+                    </div>
+
+                    <div id="police-search-result" class="space-y-4">
+                        <p class="text-xs text-gray-400 text-center py-4">Ingrese un nombre o DNI para consultar antecedentes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!---------------- TAB 7: PORTAL STAFF ---------------->
+        <div id="tab-staff" class="tab-content hidden space-y-6">
+            <div class="glass-card p-6 rounded-2xl shadow-xl">
+                <div id="staff-login-box" class="max-w-md mx-auto space-y-4 text-center">
+                    <div class="text-3xl mb-2">⚙️</div>
+                    <h2 class="text-xl font-bold text-white">Panel de Administración Staff</h2>
+                    <p class="text-xs text-gray-300">Acceso exclusivo para desarrolladores y administradores de Arica RP.</p>
+                    <input type="password" id="staff-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-center" placeholder="Contraseña Staff">
+                    <button onclick="loginStaff()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-sm">Acceder al Panel</button>
+                    <p id="staff-error" class="text-red-400 text-xs hidden">Contraseña incorrecta (Use: AricaWeb2026)</p>
+                </div>
+
+                <!-- PANEL DE GESTIÓN STAFF -->
+                <div id="staff-dashboard" class="hidden space-y-6">
+                    <div class="flex justify-between items-center border-b border-white/20 pb-4">
+                        <div>
+                            <h2 class="text-lg font-bold text-white">Panel de Control Staff</h2>
+                            <p class="text-xs text-gray-300">Modifica la economía y el concesionario global.</p>
+                        </div>
+                        <button onclick="logoutStaff()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-red-300 border-red-400/40">Cerrar Sesión</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Modificar Dinero -->
+                        <div class="glass-card p-4 rounded-xl space-y-3">
+                            <h3 class="text-sm font-bold text-white">Otorgar / Retirar Fondos a Ciudadano</h3>
+                            <input type="text" id="staff-target-dni" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre o DNI del ciudadano">
+                            <input type="number" id="staff-amount" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Monto en CLP (ej. 500000)">
+                            <div class="flex gap-2">
+                                <button onclick="staffModifyMoney('add')" class="flex-1 glass-btn py-2 rounded-xl text-xs font-semibold text-emerald-300">Sumar Dinero</button>
+                                <button onclick="staffModifyMoney('sub')" class="flex-1 glass-btn py-2 rounded-xl text-xs font-semibold text-rose-300">Restar Dinero</button>
+                            </div>
+                        </div>
+
+                        <!-- Agregar Vehículo Concesionario -->
+                        <div class="glass-card p-4 rounded-xl space-y-3">
+                            <h3 class="text-sm font-bold text-white">Añadir Vehículo al Concesionario</h3>
+                            <input type="text" id="new-car-name" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre del Vehículo (Ej. Chevrolet Sail)">
+                            <input type="number" id="new-car-price" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Precio en CLP">
+                            <button onclick="staffAddCar()" class="w-full glass-btn py-2 rounded-xl text-xs font-semibold">Publicar Vehículo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass-bg py-4 px-4 text-center text-xs text-gray-300 mt-8 border-t border-white/20">
+        <p>&copy; 2026 Arica Chile Roleplay. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // ESTADO GLOBAL DE LA APLICACIÓN
+        let appState = {
+            characters: [], // Lista de DNIs creados (Soporta múltiples PJ)
+            balance: 800000,
+            transactions: [
+                { text: "Bono de Bienvenida Inicial", amount: "+ $800.000", type: "income" }
+            ],
+            inventory: [],
+            hasPhone: false,
+            cars: [
+                { id: 1, name: "Nissan V16 Patrulla / Urbano", price: 2500000, stock: "Disponible" },
+                { id: 2, name: "Toyota Hilux 4x4", price: 4800000, stock: "Disponible" },
+                { id: 3, name: "Subaru Impreza WRX", price: 7200000, stock: "Disponible" }
+            ],
+            isStaff: false,
+            isPolice: false
+        };
+
+        // CAMBIO DE TABS
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('bg-white/30', 'border-white'));
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if(activeBtn) activeBtn.classList.add('bg-white/30', 'border-white');
+
+            if(tabId === 'dealership') renderDealership();
         }
 
-        function buyCar(price, name) {
-            if(!appState.user.registered) return showNotification("Registra tu DNI primero.");
-            if(appState.user.bank >= price) {
-                appState.user.bank -= price;
-                updateEconomyUI();
-                showNotification(`Has comprado un ${name}.`);
-            } else {
-                showNotification("Fondos insuficientes en el banco.");
-            }
-        }
+        // REGISTRO DE PERSONAJE / DNI
+        function registerCharacter() {
+            const name = document.getElementById('char-name').value.trim();
+            const lastname = document.getElementById('char-lastname').value.trim();
+            const age = document.getElementById('char-age').value.trim();
+            const gender = document.getElementById('char-gender').value;
+            const nacionality = document.getElementById('char-nacionality').value.trim();
 
-
-        // --- PORTAL STAFF ---
-        document.getElementById('form-staff-login').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const pass = document.getElementById('staff-pass').value;
-            if(pass === 'AricaWeb2026') {
-                appState.isStaff = true;
-                document.getElementById('staff-login').classList.add('hidden');
-                document.getElementById('staff-dashboard').classList.remove('hidden');
-                document.getElementById('staff-pass').value = '';
-                updateEconomyUI(); // update staff target view
-                renderStaffCars();
-                showNotification("Acceso Autorizado.");
-            } else {
-                showNotification("Contraseña incorrecta.");
-            }
-        });
-
-        function logoutStaff() {
-            appState.isStaff = false;
-            document.getElementById('staff-dashboard').classList.add('hidden');
-            document.getElementById('staff-login').classList.remove('hidden');
-            showNotification("Sesión cerrada.");
-        }
-
-        function staffModifyMoney(action) {
-            if(!appState.user.registered) return showNotification("El jugador no está registrado.");
-            
-            const input = document.getElementById('staff-money-input');
-            const amount = parseInt(input.value);
-            
-            if(isNaN(amount) || amount <= 0) return showNotification("Monto inválido.");
-
-            if(action === 'add') {
-                appState.user.bank += amount;
-                showNotification(`Se añadieron ${formatMoney(amount)} a la cuenta.`);
-            } else {
-                if(amount > appState.user.bank) appState.user.bank = 0;
-                else appState.user.bank -= amount;
-                showNotification(`Se quitaron fondos de la cuenta.`);
-            }
-            
-            input.value = '';
-            updateEconomyUI();
-        }
-
-        // Dealership Staff Control
-        document.getElementById('form-add-car').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('car-name').value;
-            const price = parseInt(document.getElementById('car-price').value);
-            const img = document.getElementById('car-img').value;
-
-            const newCar = {
-                id: Date.now(),
-                name: name,
-                price: price,
-                img: img
-            };
-
-            appState.cars.push(newCar);
-            document.getElementById('form-add-car').reset();
-            
-            renderStaffCars();
-            renderDealership();
-            showNotification("Vehículo añadido al catálogo.");
-        });
-
-        function renderStaffCars() {
-            const list = document.getElementById('staff-car-list');
-            list.innerHTML = '';
-            
-            if(appState.cars.length === 0) {
-                list.innerHTML = '<p class="text-xs text-white/50 italic">Sin vehículos.</p>';
+            if(!name || !lastname || !age) {
+                alert("Por favor complete todos los campos obligatorios del DNI.");
                 return;
             }
 
-            appState.cars.forEach(car => {
-                list.innerHTML += `
-                    <div class="flex justify-between items-center bg-black/20 p-2 rounded border border-white/10">
-                        <div>
-                            <p class="text-xs text-white uppercase">${car.name}</p>
-                            <p class="text-[10px] text-white/50 font-mono">${formatMoney(car.price)}</p>
+            const newDni = {
+                id: 'AR-' + Math.floor(100000 + Math.random() * 900000),
+                name: name,
+                lastname: lastname,
+                age: age,
+                gender: gender,
+                nacionality: nacionality || 'Chilena',
+                criminalStatus: '🟢 Sin Antecedentes',
+                fines: []
+            };
+
+            appState.characters.push(newDni);
+
+            // Actualizar UI
+            document.getElementById('dni-form-container').classList.add('hidden');
+            document.getElementById('dni-display-container').classList.remove('hidden');
+            renderDniCards();
+            updateBankUI();
+        }
+
+        function showNewDniForm() {
+            document.getElementById('char-name').value = '';
+            document.getElementById('char-lastname').value = '';
+            document.getElementById('char-age').value = '';
+            document.getElementById('dni-form-container').classList.remove('hidden');
+        }
+
+        function renderDniCards() {
+            const container = document.getElementById('dni-cards-list');
+            container.innerHTML = '';
+
+            appState.characters.forEach((char, index) => {
+                container.innerHTML += `
+                    <div class="glass-card p-5 rounded-2xl border border-white/30 relative overflow-hidden flex flex-col justify-between shadow-xl"
+                         style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.9)), url('2364562937_2534724415_1788711361325.jpg'); background-size: cover; background-position: center;">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-[10px] text-gray-300 uppercase tracking-widest">República de Chile • Arica RP</span>
+                                <h4 class="text-base font-black text-white">${char.name} ${char.lastname}</h4>
+                            </div>
+                            <img src="arica logo.png" class="w-10 h-10 rounded-full object-cover border border-white/50 shadow">
                         </div>
-                        <button onclick="deleteCar(${car.id})" class="text-white/50 hover:text-white p-2">
-                            <i class="fas fa-trash-alt text-xs"></i>
-                        </button>
+                        <div class="grid grid-cols-2 gap-2 my-4 text-xs text-gray-200">
+                            <p><b>DNI:</b> ${char.id}</p>
+                            <p><b>Edad:</b> ${char.age} años</p>
+                            <p><b>Género:</b> ${char.gender}</p>
+                            <p><b>Estado:</b> <span class="text-emerald-300 font-semibold">${char.criminalStatus}</span></p>
+                        </div>
+                        <div class="text-right text-[10px] text-gray-400 font-mono">PJ #${index + 1} Registrado</div>
+                    </div>
+                `;
+            });
+
+            // Actualizar nombre en tarjeta de banco
+            if(appState.characters.length > 0) {
+                document.getElementById('card-holder-name').innerText = `${appState.characters[0].name} ${appState.characters[0].lastname}`;
+            }
+        }
+
+        // BANCO & ECONOMÍA
+        function updateBankUI() {
+            document.getElementById('bank-balance').innerText = '$' + appState.balance.toLocaleString('es-CL') + ' CLP';
+            const history = document.getElementById('transaction-history');
+            history.innerHTML = '';
+            appState.transactions.forEach(tx => {
+                history.innerHTML += `
+                    <div class="flex justify-between items-center p-2 rounded-lg bg-white/5 border border-white/10 text-xs">
+                        <span class="text-gray-200">${tx.text}</span>
+                        <span class="${tx.type === 'income' ? 'text-emerald-400' : 'text-rose-400'} font-bold">${tx.amount}</span>
                     </div>
                 `;
             });
         }
 
-        function deleteCar(id) {
-            appState.cars = appState.cars.filter(car => car.id !== id);
-            renderStaffCars();
-            renderDealership();
-            showNotification("Vehículo eliminado.");
+        function simulateDeposit() {
+            const amount = 50000;
+            appState.balance += amount;
+            appState.transactions.unshift({ text: "Depósito en Cajero Automático", amount: "+ $50.000", type: "income" });
+            updateBankUI();
         }
 
-        // --- INICIALIZACIÓN ---
-        window.onload = () => {
-            renderDealership();
-            updateEconomyUI();
-        };
+        function simulateWithdraw() {
+            const amount = 20000;
+            if(appState.balance >= amount) {
+                appState.balance -= amount;
+                appState.transactions.unshift({ text: "Retiro de Efectivo ATM", amount: "- $20.000", type: "expense" });
+                updateBankUI();
+            } else {
+                alert("Fondos insuficientes en su cuenta bancaria.");
+            }
+        }
 
+        // CONCESIONARIO
+        function renderDealership() {
+            const grid = document.getElementById('dealership-grid');
+            grid.innerHTML = '';
+            appState.cars.forEach(car => {
+                grid.innerHTML += `
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between border border-white/20">
+                        <div>
+                            <div class="text-3xl text-center mb-2">🚗</div>
+                            <h3 class="font-bold text-white text-center text-sm">${car.name}</h3>
+                            <p class="text-xs text-gray-300 mt-1 text-center font-semibold text-emerald-400">$${car.price.toLocaleString('es-CL')} CLP</p>
+                        </div>
+                        <button onclick="buyCar('${car.name}', ${car.price})" class="mt-4 w-full glass-btn py-2 rounded-xl text-xs font-semibold">Comprar Vehículo</button>
+                    </div>
+                `;
+            });
+        }
+
+        function buyCar(name, price) {
+            if(appState.balance >= price) {
+                appState.balance -= price;
+                appState.transactions.unshift({ text: `Compra de vehículo: ${name}`, amount: `- $${price.toLocaleString('es-CL')}`, type: "expense" });
+                updateBankUI();
+                alert(`¡Has adquirido exitosamente tu ${name}! Ya se encuentra disponible en tu garaje.`);
+            } else {
+                alert("No tienes suficiente dinero en tu cuenta bancaria para este vehículo.");
+            }
+        }
+
+        // TIENDA & CELULAR
+        function buyStoreItem(name, price, type) {
+            if(appState.balance >= price) {
+                appState.balance -= price;
+                appState.inventory.push(name);
+                appState.transactions.unshift({ text: `Compra en tienda: ${name}`, amount: `- $${price.toLocaleString('es-CL')}`, type: "expense" });
+                updateBankUI();
+                renderInventory();
+
+                if(type === 'phone') {
+                    appState.hasPhone = true;
+                    document.getElementById('nav-cell').classList.remove('hidden');
+                    alert(`¡Has comprado el iPhone 18 Pro Max! Ahora tienes acceso a la pestaña "Celular" con todas sus apps.`);
+                } else {
+                    alert(`¡Has adquirido ${name} con éxito!`);
+                }
+            } else {
+                alert("Saldo insuficiente para realizar esta compra.");
+            }
+        }
+
+        function renderInventory() {
+            const inv = document.getElementById('user-inventory');
+            inv.innerHTML = '';
+            appState.inventory.forEach(item => {
+                inv.innerHTML += `<span class="px-3 py-1 bg-white/20 rounded-lg text-xs text-white border border-white/30 font-medium">✨ ${item}</span>`;
+            });
+        }
+
+        // PORTAL CELULAR APPS
+        function openPhoneApp(appName) {
+            const homeView = document.getElementById('phone-home-view');
+            const appView = document.getElementById('phone-app-view');
+            const appTitle = document.getElementById('phone-app-title');
+            const appContent = document.getElementById('phone-app-content');
+
+            if(appName === 'home') {
+                homeView.classList.remove('hidden');
+                appView.classList.add('hidden');
+                return;
+            }
+
+            homeView.classList.add('hidden');
+            appView.classList.remove('hidden');
+
+            if(appName === 'aricagram') {
+                appTitle.innerText = "AricaGram 📸";
+                appContent.innerHTML = `
+                    <div class="bg-slate-900/80 p-2 rounded-xl border border-white/10">
+                        <p class="font-bold text-[11px] text-amber-400">@carlos_arica</p>
+                        <p class="text-[10px] text-gray-200 mt-1">Disfrutando el atardecer en el Morro de Arica 🇨🇱🌅</p>
+                    </div>
+                    <div class="bg-slate-900/80 p-2 rounded-xl border border-white/10">
+                        <p class="font-bold text-[11px] text-blue-400">@carabineros_cl</p>
+                        <p class="text-[10px] text-gray-200 mt-1">Operativo preventivo en la costanera. ¡Conduzca con precaución!</p>
+                    </div>
+                `;
+            } else if(appName === 'chat') {
+                appTitle.innerText = "AricaChat 💬";
+                appContent.innerHTML = `
+                    <div class="p-2 rounded-lg bg-blue-900/40 text-[11px]"><b>Soporte Arica RP:</b> ¡Hola ciudadano! Bienvenido al servidor.</div>
+                    <div class="p-2 rounded-lg bg-emerald-900/40 text-[11px]"><b>Mecánico:</b> ¿Necesitas repuestos o grúa? Ubícame en el taller central.</div>
+                `;
+            } else if(appName === 'bank') {
+                appTitle.innerText = "BancaApp 💳";
+                appContent.innerHTML = `
+                    <div class="p-3 rounded-xl bg-gradient-to-r from-blue-900 to-indigo-900 text-center">
+                        <p class="text-[10px] text-gray-300">Saldo Disponible</p>
+                        <p class="text-base font-black text-white">$${appState.balance.toLocaleString('es-CL')} CLP</p>
+                    </div>
+                    <p class="text-[10px] text-gray-400 text-center mt-2">Estado de cuenta verificado por Arica Banco.</p>
+                `;
+            } else if(appName === 'emergency') {
+                appTitle.innerText = "Emergencias 🚨";
+                appContent.innerHTML = `
+                    <div class="space-y-2">
+                        <button onclick="alert('Llamada enviada a Carabineros de Arica. Una patrulla va en camino.')" class="w-full py-2 bg-blue-600/80 rounded-lg text-white font-bold text-[11px]">👮‍♂️ Llamar a Carabineros</button>
+                        <button onclick="alert('Llamada enviada al SAMU. Ambulancia en ruta.')" class="w-full py-2 bg-red-600/80 rounded-lg text-white font-bold text-[11px]">🚑 Llamar a Ambulancia</button>
+                    </div>
+                `;
+            }
+        }
+
+        function closePhoneApp() {
+            openPhoneApp('home');
+        }
+
+        // PORTAL POLICIAL
+        function loginPolice() {
+            const pass = document.getElementById('police-pass').value;
+            if(pass === 'AricaPolice2026') {
+                appState.isPolice = true;
+                document.getElementById('police-login-box').classList.add('hidden');
+                document.getElementById('police-dashboard').classList.remove('hidden');
+            } else {
+                document.getElementById('police-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutPolice() {
+            appState.isPolice = false;
+            document.getElementById('police-login-box').classList.remove('hidden');
+            document.getElementById('police-dashboard').classList.add('hidden');
+            document.getElementById('police-pass').value = '';
+        }
+
+        function searchCitizenPolice() {
+            const query = document.getElementById('police-search-dni').value.toLowerCase();
+            const resultBox = document.getElementById('police-search-result');
+            resultBox.innerHTML = '';
+
+            const found = appState.characters.filter(c => c.name.toLowerCase().includes(query) || c.id.toLowerCase().includes(query));
+
+            if(found.length === 0) {
+                resultBox.innerHTML = '<p class="text-xs text-rose-400 text-center py-2">No se encontró ningún ciudadano con ese registro.</p>';
+                return;
+            }
+
+            found.forEach(char => {
+                resultBox.innerHTML += `
+                    <div class="glass-card p-4 rounded-xl space-y-2 border border-white/20">
+                        <div class="flex justify-between items-center">
+                            <h4 class="font-bold text-white text-sm">${char.name} ${char.lastname} (${char.id})</h4>
+                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30">${char.criminalStatus}</span>
+                        </div>
+                        <div class="flex gap-2 pt-2">
+                            <button onclick="policeAddFine('${char.id}')" class="glass-btn px-3 py-1 rounded text-xs text-amber-300">Poner Multa ($50k)</button>
+                            <button onclick="policeToggleWanted('${char.id}')" class="glass-btn px-3 py-1 rounded text-xs text-rose-300">Cambiar Estado Legal</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function policeAddFine(dniId) {
+            const char = appState.characters.find(c => c.id === dniId);
+            if(char) {
+                const fineAmount = 50000;
+                if(appState.balance >= fineAmount) {
+                    appState.balance -= fineAmount;
+                    appState.transactions.unshift({ text: `Multa Policial aplicada a ${char.name}`, amount: `- $50.000`, type: "expense" });
+                    updateBankUI();
+                    alert(`Multa de $50.000 CLP aplicada y descontada de la cuenta del ciudadano ${char.name}.`);
+                } else {
+                    alert("El ciudadano no cuenta con fondos suficientes para pagar la multa en su cuenta.");
+                }
+            }
+        }
+
+        function policeToggleWanted(dniId) {
+            const char = appState.characters.find(c => c.id === dniId);
+            if(char) {
+                if(char.criminalStatus.includes('Sin')) {
+                    char.criminalStatus = '🔴 Orden de Arresto';
+                } else {
+                    char.criminalStatus = '🟢 Sin Antecedentes';
+                }
+                renderDniCards();
+                searchCitizenPolice();
+                alert(`Estado legal de ${char.name} actualizado.`);
+            }
+        }
+
+        // PORTAL STAFF
+        function loginStaff() {
+            const pass = document.getElementById('staff-pass').value;
+            if(pass === 'AricaWeb2026') {
+                appState.isStaff = true;
+                document.getElementById('staff-login-box').classList.add('hidden');
+                document.getElementById('staff-dashboard').classList.remove('hidden');
+                document.getElementById('staff-dealership-badge').classList.remove('hidden');
+            } else {
+                document.getElementById('staff-error').classList.remove('hidden');
+            }
+        }
+
+        function logoutStaff() {
+            appState.isStaff = false;
+            document.getElementById('staff-login-box').classList.remove('hidden');
+            document.getElementById('staff-dashboard').classList.add('hidden');
+            document.getElementById('staff-dealership-badge').classList.add('hidden');
+            document.getElementById('staff-pass').value = '';
+        }
+
+        function staffModifyMoney(action) {
+            const amount = parseInt(document.getElementById('staff-amount').value);
+            if(isNaN(amount) || amount <= 0) {
+                alert("Ingrese un monto válido.");
+                return;
+            }
+
+            if(action === 'add') {
+                appState.balance += amount;
+                appState.transactions.unshift({ text: "Ajuste de Fondos por Staff", amount: `+ $${amount.toLocaleString('es-CL')}`, type: "income" });
+                alert(`Se han sumado $${amount.toLocaleString('es-CL')} CLP correctamente.`);
+            } else {
+                appState.balance -= amount;
+                appState.transactions.unshift({ text: "Retiro de Fondos por Staff", amount: `- $${amount.toLocaleString('es-CL')}`, type: "expense" });
+                alert(`Se han descontado $${amount.toLocaleString('es-CL')} CLP correctamente.`);
+            }
+            updateBankUI();
+        }
+
+        function staffAddCar() {
+            const name = document.getElementById('new-car-name').value.trim();
+            const price = parseInt(document.getElementById('new-car-price').value);
+
+            if(!name || isNaN(price)) {
+                alert("Complete los datos del vehículo correctamente.");
+                return;
+            }
+
+            appState.cars.push({ id: appState.cars.length + 1, name: name, price: price, stock: "Disponible" });
+            alert(`Vehículo "${name}" agregado al concesionario con éxito.`);
+            document.getElementById('new-car-name').value = '';
+            document.getElementById('new-car-price').value = '';
+            renderDealership();
+        }
     </script>
 </body>
 </html>
