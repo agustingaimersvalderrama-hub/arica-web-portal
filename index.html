@@ -8,76 +8,82 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            background-image: url('2364562937_2534724415_1788711361325.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: #050505;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(20, 20, 30, 0.8) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(15, 15, 25, 0.8) 0%, transparent 40%);
         }
         .glass-bg {
-            background: rgba(15, 23, 42, 0.45);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(10, 10, 15, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         .glass-card {
-            background: rgba(30, 41, 59, 0.5);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(18, 18, 26, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
         .glass-input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: white;
+            transition: all 0.3s ease;
+        }
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
         }
         .glass-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.4);
         }
         .glass-btn {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
             transition: all 0.3s ease;
         }
         .glass-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
         }
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.3);
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
         }
     </style>
 </head>
 <body class="min-h-screen text-white font-sans flex flex-col justify-between">
 
     <!-- HEADER / NAVIGATION -->
-    <header class="glass-bg sticky top-0 z-50 px-4 py-3 shadow-lg">
+    <header class="glass-bg sticky top-0 z-50 px-4 py-3">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <!-- LOGO & TITLE -->
             <div class="flex items-center space-x-3">
-                <img src="arica logo.png" alt="Arica RP Logo" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-md">
+                <img src="arica logo.png" alt="Arica RP Logo" class="w-11 h-11 rounded-full object-cover border border-white/20 shadow-md">
                 <div>
-                    <h1 class="text-lg font-extrabold tracking-wider text-white">ARICA CHILE RP</h1>
-                    <p class="text-xs text-gray-200">Portal Ciudadano y Administrativo</p>
+                    <h1 class="text-sm font-extrabold tracking-widest text-white uppercase">ARICA CHILE RP</h1>
+                    <p class="text-[10px] text-gray-400">Portal Ciudadano y Administrativo</p>
                 </div>
             </div>
 
             <!-- NAVIGATION TABS (CERO EMOJIS EN BOTONES) -->
-            <nav class="flex flex-wrap justify-center gap-2">
-                <button onclick="switchTab('identity')" id="btn-identity" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">Identidad</button>
-                <button onclick="switchTab('economy')" id="btn-economy" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">Banco</button>
-                <button onclick="switchTab('dealership')" id="btn-dealership" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">Concesionario</button>
-                <button onclick="switchTab('store')" id="btn-store" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">Tienda</button>
-                <button onclick="switchTab('cellphone')" id="btn-cellphone" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm hidden" id="nav-cell">Celular</button>
-                <button onclick="switchTab('police')" id="btn-police" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">Policial</button>
-                <button onclick="switchTab('staff')" id="btn-staff" class="glass-btn px-4 py-2 rounded-xl text-sm font-semibold text-white shadow-sm">Staff</button>
+            <nav class="flex flex-wrap justify-center gap-1.5">
+                <button onclick="switchTab('identity')" id="btn-identity" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Identidad</button>
+                <button onclick="switchTab('economy')" id="btn-economy" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Banco</button>
+                <button onclick="switchTab('dealership')" id="btn-dealership" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Concesionario</button>
+                <button onclick="switchTab('store')" id="btn-store" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Tienda</button>
+                <button onclick="switchTab('cellphone')" id="btn-cellphone" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white hidden" id="nav-cell">Celular</button>
+                <button onclick="switchTab('police')" id="btn-police" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Policial</button>
+                <button onclick="switchTab('staff')" id="btn-staff" class="glass-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white">Staff</button>
             </nav>
         </div>
     </header>
@@ -87,51 +93,51 @@
 
         <!---------------- TAB 1: IDENTIDAD (DNI & 2DO PJ) ---------------->
         <div id="tab-identity" class="tab-content space-y-6">
-            <div class="glass-card p-6 md:p-8 rounded-2xl shadow-2xl">
+            <div class="glass-card p-6 md:p-8 rounded-2xl">
                 <div class="text-center mb-6">
-                    <h2 class="text-2xl font-bold text-white">Registro de Identidad Ciudadana</h2>
-                    <p class="text-sm text-gray-200 mt-1">Crea tu documentación oficial para ingresar legalmente a Arica Chile Roleplay.</p>
+                    <h2 class="text-xl font-bold text-white tracking-wide">Registro de Identidad Ciudadana</h2>
+                    <p class="text-xs text-gray-400 mt-1">Crea tu documentación oficial para ingresar legalmente a Arica Chile Roleplay.</p>
                 </div>
 
                 <div id="dni-form-container" class="space-y-4 max-w-xl mx-auto">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-medium text-gray-200 mb-1">Nombre</label>
-                            <input type="text" id="char-name" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ej. Ignacio">
+                            <label class="block text-[11px] font-medium text-gray-400 mb-1">Nombre</label>
+                            <input type="text" id="char-name" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs focus:outline-none" placeholder="Ej. Ignacio">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-gray-200 mb-1">Apellido</label>
-                            <input type="text" id="char-lastname" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ej. Rojas">
+                            <label class="block text-[11px] font-medium text-gray-400 mb-1">Apellido</label>
+                            <input type="text" id="char-lastname" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs focus:outline-none" placeholder="Ej. Rojas">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-medium text-gray-200 mb-1">Edad</label>
-                            <input type="number" id="char-age" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ej. 25">
+                            <label class="block text-[11px] font-medium text-gray-400 mb-1">Edad</label>
+                            <input type="number" id="char-age" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs focus:outline-none" placeholder="Ej. 25">
                         </div>
                         <div>
-                            <label class="block text-xs font-medium text-gray-200 mb-1">Género</label>
-                            <select id="char-gender" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50 bg-slate-900/80">
-                                <option value="Masculino" class="bg-slate-900">Masculino</option>
-                                <option value="Femenino" class="bg-slate-900">Femenino</option>
-                                <option value="Otro" class="bg-slate-900">Otro</option>
+                            <label class="block text-[11px] font-medium text-gray-400 mb-1">Género</label>
+                            <select id="char-gender" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs focus:outline-none bg-[#0a0a0f]">
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
                             </select>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-gray-200 mb-1">Nacionalidad</label>
-                        <input type="text" id="char-nacionality" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-white/50" value="Chilena">
+                        <label class="block text-[11px] font-medium text-gray-400 mb-1">Nacionalidad</label>
+                        <input type="text" id="char-nacionality" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs focus:outline-none" value="Chilena">
                     </div>
-                    <button onclick="registerCharacter()" class="w-full glass-btn py-3 rounded-xl font-bold text-sm text-white tracking-wide shadow-lg mt-4">
+                    <button onclick="registerCharacter()" class="w-full glass-btn py-3 rounded-xl font-bold text-xs text-white tracking-wider mt-2">
                         Emitir Documento de Identidad ($800.000 Iniciales)
                     </button>
                 </div>
 
                 <div id="dni-display-container" class="mt-8 space-y-6 hidden">
-                    <h3 class="text-lg font-semibold text-center text-white border-b border-white/20 pb-2">Tus Ciudadanos Registrados</h3>
+                    <h3 class="text-xs font-semibold uppercase tracking-wider text-center text-gray-400 border-b border-white/10 pb-2">Tus Ciudadanos Registrados</h3>
                     <div id="dni-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-                    <div class="text-center pt-2" id="add-pj-wrapper">
-                        <button onclick="showNewDniForm()" class="glass-btn px-6 py-2.5 rounded-xl text-sm font-semibold text-white">
+                    <div class="text-center pt-2">
+                        <button onclick="showNewDniForm()" class="glass-btn px-6 py-2.5 rounded-xl text-xs font-semibold text-white">
                             Crear 2do Personaje (Nuevo DNI)
                         </button>
                     </div>
@@ -142,49 +148,48 @@
         <!---------------- TAB 2: BANCO ---------------->
         <div id="tab-economy" class="tab-content hidden space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass-card p-6 rounded-2xl shadow-xl flex flex-col justify-between">
+                <div class="glass-card p-6 rounded-2xl flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between border-b border-white/20 pb-4 mb-4">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
                             <div>
-                                <h3 class="text-sm font-medium text-gray-300">Banco Digital Arica</h3>
+                                <h3 class="text-[11px] font-medium text-gray-400">Banco Digital Arica</h3>
                                 <p class="text-2xl font-black text-white mt-1" id="bank-balance">$800.000 CLP</p>
                             </div>
-                            <span class="px-3 py-1 bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs rounded-full font-semibold">Cuenta Activa</span>
+                            <span class="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] rounded-full font-semibold">Cuenta Activa</span>
                         </div>
-                        <h4 class="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Últimos Movimientos</h4>
-                        <div id="transaction-history" class="space-y-2 max-h-48 overflow-y-auto pr-1 text-sm">
-                            <div class="flex justify-between items-center p-2 rounded-lg bg-white/5 border border-white/10 text-xs">
-                                <span class="text-gray-200">Bono de Bienvenida Inicial</span>
+                        <h4 class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Últimos Movimientos</h4>
+                        <div id="transaction-history" class="space-y-2 max-h-48 overflow-y-auto pr-1 text-xs">
+                            <div class="flex justify-between items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-[11px]">
+                                <span class="text-gray-300">Bono de Bienvenida Inicial</span>
                                 <span class="text-emerald-400 font-bold">+ $800.000</span>
                             </div>
                         </div>
                     </div>
                     <div class="mt-6 pt-4 border-t border-white/10 flex gap-2">
-                        <button onclick="simulateDeposit()" class="flex-1 glass-btn py-2 rounded-xl text-xs font-semibold">Simular Ingreso</button>
-                        <button onclick="simulateWithdraw()" class="flex-1 glass-btn py-2 rounded-xl text-xs font-semibold">Girar Dinero</button>
+                        <button onclick="simulateDeposit()" class="flex-1 glass-btn py-2 rounded-xl text-[11px] font-semibold">Simular Ingreso</button>
+                        <button onclick="simulateWithdraw()" class="flex-1 glass-btn py-2 rounded-xl text-[11px] font-semibold">Girar Dinero</button>
                     </div>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl shadow-xl flex flex-col items-center justify-center">
-                    <h3 class="text-sm font-semibold text-gray-200 mb-4 self-start">Tu Tarjeta de Débito</h3>
-                    <div class="w-full max-w-sm h-52 rounded-2xl p-5 shadow-2xl relative overflow-hidden flex flex-col justify-between border border-white/30"
-                         style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.9)), url('2364562937_2534724415_1788711361325.jpg'); background-size: cover; background-position: center;">
+                <div class="glass-card p-6 rounded-2xl flex flex-col items-center justify-center">
+                    <h3 class="text-[11px] font-semibold text-gray-400 mb-4 self-start uppercase tracking-wider">Tu Tarjeta de Débito</h3>
+                    <div class="w-full max-w-sm h-52 rounded-2xl p-5 shadow-2xl relative overflow-hidden flex flex-col justify-between border border-white/15 bg-gradient-to-br from-zinc-900 via-neutral-900 to-black">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold tracking-widest uppercase text-white drop-shadow">Arica Banco</span>
-                            <img src="arica logo.png" class="w-8 h-8 rounded-full object-cover border border-white/60">
+                            <span class="text-[10px] font-bold tracking-widest uppercase text-gray-300">Arica Banco</span>
+                            <img src="arica logo.png" class="w-7 h-7 rounded-full object-cover border border-white/30">
                         </div>
                         <div class="flex items-center space-x-3 my-auto">
-                            <div class="w-10 h-7 bg-amber-300/80 rounded-md border border-amber-500 flex items-center justify-center text-[9px] font-mono text-black font-bold">CHIP</div>
-                            <div class="text-lg font-mono tracking-widest text-white drop-shadow-md">•••• •••• •••• 4026</div>
+                            <div class="w-9 h-6 bg-zinc-700/80 rounded border border-zinc-600 flex items-center justify-center text-[8px] font-mono text-zinc-300 font-bold">CHIP</div>
+                            <div class="text-base font-mono tracking-widest text-white">•••• •••• •••• 4026</div>
                         </div>
-                        <div class="flex justify-between items-end text-xs">
+                        <div class="flex justify-between items-end text-[11px]">
                             <div>
-                                <p class="text-[9px] text-gray-300 uppercase">Titular</p>
-                                <p class="font-bold text-white tracking-wide uppercase" id="card-holder-name">REGISTRA TU DNI</p>
+                                <p class="text-[8px] text-gray-500 uppercase tracking-wider">Titular</p>
+                                <p class="font-bold text-white tracking-wide uppercase text-xs" id="card-holder-name">REGISTRA TU DNI</p>
                             </div>
                             <div>
-                                <p class="text-[9px] text-gray-300 uppercase">Expira</p>
-                                <p class="font-bold text-white">08/30</p>
+                                <p class="text-[8px] text-gray-500 uppercase tracking-wider">Expira</p>
+                                <p class="font-bold text-gray-300 text-xs">08/30</p>
                             </div>
                         </div>
                     </div>
@@ -194,14 +199,14 @@
 
         <!---------------- TAB 3: CONCESIONARIO ---------------->
         <div id="tab-dealership" class="tab-content hidden space-y-6">
-            <div class="glass-card p-6 rounded-2xl shadow-xl">
+            <div class="glass-card p-6 rounded-2xl">
                 <div class="flex justify-between items-center mb-6">
                     <div>
                         <h2 class="text-xl font-bold text-white">Concesionario de Vehículos</h2>
-                        <p class="text-xs text-gray-300">Adquiere automóviles para moverte por toda la ciudad de Arica.</p>
+                        <p class="text-xs text-gray-400">Adquiere automóviles para moverte por toda la ciudad de Arica.</p>
                     </div>
                     <div id="staff-dealership-badge" class="hidden">
-                        <span class="px-3 py-1 bg-amber-500/20 border border-amber-400/40 text-amber-300 text-xs rounded-full">Modo Staff Activo</span>
+                        <span class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 text-[10px] rounded-full">Modo Staff Activo</span>
                     </div>
                 </div>
                 <div id="dealership-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
@@ -210,47 +215,47 @@
 
         <!---------------- TAB 4: TIENDA ---------------->
         <div id="tab-store" class="tab-content hidden space-y-6">
-            <div class="glass-card p-6 rounded-2xl shadow-xl">
+            <div class="glass-card p-6 rounded-2xl">
                 <div class="text-center mb-6">
-                    <h2 class="text-2xl font-bold text-white">Tienda Oficial de Arica RP</h2>
-                    <p class="text-sm text-gray-300">Compra tus licencias oficiales y dispositivos tecnológicos exclusivos.</p>
+                    <h2 class="text-xl font-bold text-white">Tienda Oficial de Arica RP</h2>
+                    <p class="text-xs text-gray-400 mt-1">Compra tus licencias oficiales y dispositivos tecnológicos exclusivos.</p>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between border border-white/20">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
                         <div>
-                            <h3 class="font-bold text-white text-center">Licencia de Conducir Clase B</h3>
-                            <p class="text-xs text-gray-300 mt-2 text-center">Documento obligatorio para manejar automóviles legalmente en la vía pública.</p>
+                            <h3 class="font-bold text-white text-xs text-center">Licencia de Conducir Clase B</h3>
+                            <p class="text-[11px] text-gray-400 mt-2 text-center">Documento obligatorio para manejar automóviles legalmente en la vía pública.</p>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                            <span class="text-emerald-400 font-bold text-sm">$45.000 CLP</span>
-                            <button onclick="buyStoreItem('Licencia Clase B', 45000, 'license')" class="glass-btn px-4 py-1.5 rounded-lg text-xs font-semibold">Comprar</button>
+                        <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-emerald-400 font-bold text-xs">$45.000 CLP</span>
+                            <button onclick="buyStoreItem('Licencia Clase B', 45000, 'license')" class="glass-btn px-3.5 py-1.5 rounded-lg text-[11px] font-semibold">Comprar</button>
                         </div>
                     </div>
-                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between border border-white/20 bg-gradient-to-b from-slate-800/60 to-slate-900/80">
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
                         <div>
-                            <h3 class="font-bold text-white text-center">iPhone 18 Pro Max</h3>
-                            <p class="text-xs text-gray-300 mt-2 text-center">Smartphone gama alta. Desbloquea acceso completo al Portal Celular.</p>
+                            <h3 class="font-bold text-white text-xs text-center">iPhone 18 Pro Max</h3>
+                            <p class="text-[11px] text-gray-400 mt-2 text-center">Smartphone gama alta. Desbloquea acceso completo al Portal Celular.</p>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                            <span class="text-emerald-400 font-bold text-sm">$850.000 CLP</span>
-                            <button onclick="buyStoreItem('iPhone 18 Pro Max', 850000, 'phone')" class="glass-btn px-4 py-1.5 rounded-lg text-xs font-semibold">Comprar</button>
+                        <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-emerald-400 font-bold text-xs">$850.000 CLP</span>
+                            <button onclick="buyStoreItem('iPhone 18 Pro Max', 850000, 'phone')" class="glass-btn px-3.5 py-1.5 rounded-lg text-[11px] font-semibold">Comprar</button>
                         </div>
                     </div>
-                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between border border-white/20">
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
                         <div>
-                            <h3 class="font-bold text-white text-center">Kit de Mecánica Rápida</h3>
-                            <p class="text-xs text-gray-300 mt-2 text-center">Herramientas esenciales para reparaciones de emergencia en ruta.</p>
+                            <h3 class="font-bold text-white text-xs text-center">Kit de Mecánica Rápida</h3>
+                            <p class="text-[11px] text-gray-400 mt-2 text-center">Herramientas esenciales para reparaciones de emergencia en ruta.</p>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-white/10 flex items-center justify-between">
-                            <span class="text-emerald-400 font-bold text-sm">$30.000 CLP</span>
-                            <button onclick="buyStoreItem('Kit de Mecánica', 30000, 'item')" class="glass-btn px-4 py-1.5 rounded-lg text-xs font-semibold">Comprar</button>
+                        <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+                            <span class="text-emerald-400 font-bold text-xs">$30.000 CLP</span>
+                            <button onclick="buyStoreItem('Kit de Mecánica', 30000, 'item')" class="glass-btn px-3.5 py-1.5 rounded-lg text-[11px] font-semibold">Comprar</button>
                         </div>
                     </div>
                 </div>
-                <div class="mt-8 pt-6 border-t border-white/20">
-                    <h3 class="text-sm font-semibold text-white mb-3">Tus Pertenencias y Licencias</h3>
+                <div class="mt-8 pt-6 border-t border-white/10">
+                    <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Tus Pertenencias y Licencias</h3>
                     <div id="user-inventory" class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white/10 rounded-lg text-xs text-gray-300 border border-white/10">Ningún objeto adquirido aún</span>
+                        <span class="px-3 py-1 bg-white/5 rounded-lg text-[11px] text-gray-400 border border-white/5">Ningún objeto adquirido aún</span>
                     </div>
                 </div>
             </div>
@@ -259,35 +264,35 @@
         <!---------------- TAB 5: PORTAL CELULAR ---------------->
         <div id="tab-cellphone" class="tab-content hidden space-y-6">
             <div class="flex justify-center">
-                <div class="w-full max-w-sm glass-card rounded-[40px] p-4 shadow-2xl border-4 border-slate-700/80 relative overflow-hidden bg-slate-950/80">
-                    <div class="w-28 h-5 bg-black rounded-full mx-auto mb-4 flex items-center justify-center">
-                        <div class="w-3 h-3 bg-slate-900 rounded-full mr-2"></div>
-                        <div class="w-2 h-2 bg-blue-900/60 rounded-full"></div>
+                <div class="w-full max-w-sm glass-card rounded-[36px] p-4 shadow-2xl border-2 border-zinc-800 relative overflow-hidden bg-black/90">
+                    <div class="w-24 h-4 bg-zinc-900 rounded-full mx-auto mb-3 flex items-center justify-center">
+                        <div class="w-2.5 h-2.5 bg-black rounded-full mr-2"></div>
+                        <div class="w-1.5 h-1.5 bg-blue-500/50 rounded-full"></div>
                     </div>
-                    <div id="phone-screen" class="min-h-[480px] flex flex-col justify-between text-white">
+                    <div id="phone-screen" class="min-h-[460px] flex flex-col justify-between text-white">
                         <div id="phone-home-view">
                             <div class="text-center mb-4">
-                                <p class="text-xs text-gray-400 font-mono">10:02 AM</p>
-                                <h3 class="text-sm font-bold mt-1 text-white">AricaPhone OS</h3>
+                                <p class="text-[10px] text-gray-500 font-mono">10:02 AM</p>
+                                <h3 class="text-xs font-bold mt-0.5 text-white">AricaPhone OS</h3>
                             </div>
-                            <div class="grid grid-cols-2 gap-3 px-2 py-4">
-                                <button onclick="openPhoneApp('aricagram')" class="glass-btn p-3 rounded-xl text-center text-xs font-semibold">AricaGram</button>
-                                <button onclick="openPhoneApp('chat')" class="glass-btn p-3 rounded-xl text-center text-xs font-semibold">Mensajes</button>
-                                <button onclick="openPhoneApp('bank')" class="glass-btn p-3 rounded-xl text-center text-xs font-semibold">BancaApp</button>
-                                <button onclick="openPhoneApp('emergency')" class="glass-btn p-3 rounded-xl text-center text-xs font-semibold text-rose-300">Emergencia</button>
+                            <div class="grid grid-cols-2 gap-2.5 px-1 py-3">
+                                <button onclick="openPhoneApp('aricagram')" class="glass-btn p-3 rounded-xl text-center text-[11px] font-semibold">AricaGram</button>
+                                <button onclick="openPhoneApp('chat')" class="glass-btn p-3 rounded-xl text-center text-[11px] font-semibold">Mensajes</button>
+                                <button onclick="openPhoneApp('bank')" class="glass-btn p-3 rounded-xl text-center text-[11px] font-semibold">BancaApp</button>
+                                <button onclick="openPhoneApp('emergency')" class="glass-btn p-3 rounded-xl text-center text-[11px] font-semibold text-rose-400">Emergencia</button>
                             </div>
                         </div>
                         <div id="phone-app-view" class="hidden flex-grow flex flex-col">
-                            <div class="flex items-center justify-between border-b border-white/20 pb-2 mb-3">
-                                <button onclick="closePhoneApp()" class="text-xs text-blue-400 font-semibold">Volver</button>
-                                <span id="phone-app-title" class="text-xs font-bold text-white">App</span>
+                            <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
+                                <button onclick="closePhoneApp()" class="text-[11px] text-blue-400 font-semibold">Volver</button>
+                                <span id="phone-app-title" class="text-[11px] font-bold text-white">App</span>
                                 <span></span>
                             </div>
-                            <div id="phone-app-content" class="flex-grow overflow-y-auto text-xs space-y-2 pr-1"></div>
+                            <div id="phone-app-content" class="flex-grow overflow-y-auto text-[11px] space-y-2 pr-1"></div>
                         </div>
-                        <div class="pt-3 border-t border-white/10 flex justify-between items-center text-[10px] text-gray-400 px-4">
+                        <div class="pt-3 border-t border-white/10 flex justify-between items-center text-[9px] text-gray-500 px-3">
                             <span>Arica 5G</span>
-                            <div class="w-24 h-1 bg-white/40 rounded-full cursor-pointer" onclick="openPhoneApp('home')"></div>
+                            <div class="w-20 h-1 bg-white/30 rounded-full cursor-pointer" onclick="openPhoneApp('home')"></div>
                             <span>100%</span>
                         </div>
                     </div>
@@ -297,28 +302,28 @@
 
         <!---------------- TAB 6: PORTAL POLICIAL ---------------->
         <div id="tab-police" class="tab-content hidden space-y-6">
-            <div class="glass-card p-6 rounded-2xl shadow-xl">
+            <div class="glass-card p-6 rounded-2xl">
                 <div id="police-login-box" class="max-w-md mx-auto space-y-4 text-center">
                     <h2 class="text-xl font-bold text-white">Acceso Restringido - Carabineros / PDI</h2>
-                    <p class="text-xs text-gray-300">Ingrese código de autorización policial para gestionar multas y antecedentes.</p>
-                    <input type="password" id="police-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-center" placeholder="Clave Policial">
-                    <button onclick="loginPolice()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-sm">Iniciar Sesión Policial</button>
-                    <p id="police-error" class="text-red-400 text-xs hidden">Clave incorrecta (Use: AricaPolice2026)</p>
+                    <p class="text-xs text-gray-400">Ingrese código de autorización policial para gestionar multas y antecedentes.</p>
+                    <input type="password" id="police-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs text-center" placeholder="Clave Policial">
+                    <button onclick="loginPolice()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-xs">Iniciar Sesión Policial</button>
+                    <p id="police-error" class="text-rose-400 text-xs hidden">Clave incorrecta (Use: AricaPolice2026)</p>
                 </div>
                 <div id="police-dashboard" class="hidden space-y-6">
-                    <div class="flex justify-between items-center border-b border-white/20 pb-4">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-4">
                         <div>
-                            <h2 class="text-lg font-bold text-white">Sistema Integrado Policial (SIP)</h2>
-                            <p class="text-xs text-gray-300">Control y registro de antecedentes ciudadanos.</p>
+                            <h2 class="text-base font-bold text-white">Sistema Integrado Policial (SIP)</h2>
+                            <p class="text-xs text-gray-400">Control y registro de antecedentes ciudadanos.</p>
                         </div>
-                        <button onclick="logoutPolice()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-red-300 border-red-400/40">Cerrar Sesión</button>
+                        <button onclick="logoutPolice()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-rose-400 border-rose-500/20">Cerrar Sesión</button>
                     </div>
                     <div class="flex gap-2">
-                        <input type="text" id="police-search-dni" class="glass-input flex-grow px-4 py-2 rounded-xl text-sm" placeholder="Buscar por Nombre o DNI...">
-                        <button onclick="searchCitizenPolice()" class="glass-btn px-5 py-2 rounded-xl text-sm font-semibold">Buscar</button>
+                        <input type="text" id="police-search-dni" class="glass-input flex-grow px-4 py-2 rounded-xl text-xs" placeholder="Buscar por Nombre o DNI...">
+                        <button onclick="searchCitizenPolice()" class="glass-btn px-4 py-2 rounded-xl text-xs font-semibold">Buscar</button>
                     </div>
                     <div id="police-search-result" class="space-y-4">
-                        <p class="text-xs text-gray-400 text-center py-4">Ingrese un nombre o DNI para consultar antecedentes.</p>
+                        <p class="text-xs text-gray-500 text-center py-4">Ingrese un nombre o DNI para consultar antecedentes.</p>
                     </div>
                 </div>
             </div>
@@ -326,37 +331,37 @@
 
         <!---------------- TAB 7: PORTAL STAFF ---------------->
         <div id="tab-staff" class="tab-content hidden space-y-6">
-            <div class="glass-card p-6 rounded-2xl shadow-xl">
+            <div class="glass-card p-6 rounded-2xl">
                 <div id="staff-login-box" class="max-w-md mx-auto space-y-4 text-center">
                     <h2 class="text-xl font-bold text-white">Panel de Administración Staff</h2>
-                    <p class="text-xs text-gray-300">Acceso exclusivo para administradores de Arica RP.</p>
-                    <input type="password" id="staff-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-sm text-center" placeholder="Contraseña Staff">
-                    <button onclick="loginStaff()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-sm">Acceder al Panel</button>
-                    <p id="staff-error" class="text-red-400 text-xs hidden">Contraseña incorrecta (Use: AricaWeb2026)</p>
+                    <p class="text-xs text-gray-400">Acceso exclusivo para administradores de Arica RP.</p>
+                    <input type="password" id="staff-pass" class="glass-input w-full px-4 py-2.5 rounded-xl text-xs text-center" placeholder="Contraseña Staff">
+                    <button onclick="loginStaff()" class="w-full glass-btn py-2.5 rounded-xl font-bold text-xs">Acceder al Panel</button>
+                    <p id="staff-error" class="text-rose-400 text-xs hidden">Contraseña incorrecta (Use: AricaWeb2026)</p>
                 </div>
                 <div id="staff-dashboard" class="hidden space-y-6">
-                    <div class="flex justify-between items-center border-b border-white/20 pb-4">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-4">
                         <div>
-                            <h2 class="text-lg font-bold text-white">Panel de Control Staff</h2>
-                            <p class="text-xs text-gray-300">Modifica la economía y el concesionario global.</p>
+                            <h2 class="text-base font-bold text-white">Panel de Control Staff</h2>
+                            <p class="text-xs text-gray-400">Modifica la economía y el concesionario global.</p>
                         </div>
-                        <button onclick="logoutStaff()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-red-300 border-red-400/40">Cerrar Sesión</button>
+                        <button onclick="logoutStaff()" class="glass-btn px-3 py-1.5 rounded-lg text-xs text-rose-400 border-rose-500/20">Cerrar Sesión</button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="glass-card p-4 rounded-xl space-y-3">
-                            <h3 class="text-sm font-bold text-white">Otorgar / Retirar Fondos a Ciudadano</h3>
+                            <h3 class="text-xs font-bold text-white">Otorgar / Retirar Fondos a Ciudadano</h3>
                             <input type="text" id="staff-target-dni" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre o DNI del ciudadano">
                             <input type="number" id="staff-amount" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Monto en CLP">
                             <div class="flex gap-2">
-                                <button onclick="staffModifyMoney('add')" class="flex-1 glass-btn py-2 rounded-xl text-xs font-semibold text-emerald-300">Sumar Dinero</button>
-                                <button onclick="staffModifyMoney('sub')" class="flex-1 glass-btn py-2 rounded-xl text-xs font-semibold text-rose-300">Restar Dinero</button>
+                                <button onclick="staffModifyMoney('add')" class="flex-1 glass-btn py-2 rounded-xl text-[11px] font-semibold text-emerald-400">Sumar Dinero</button>
+                                <button onclick="staffModifyMoney('sub')" class="flex-1 glass-btn py-2 rounded-xl text-[11px] font-semibold text-rose-400">Restar Dinero</button>
                             </div>
                         </div>
                         <div class="glass-card p-4 rounded-xl space-y-3">
-                            <h3 class="text-sm font-bold text-white">Añadir Vehículo al Concesionario</h3>
+                            <h3 class="text-xs font-bold text-white">Añadir Vehículo al Concesionario</h3>
                             <input type="text" id="new-car-name" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Nombre del Vehículo">
                             <input type="number" id="new-car-price" class="glass-input w-full px-3 py-2 rounded-xl text-xs" placeholder="Precio en CLP">
-                            <button onclick="staffAddCar()" class="w-full glass-btn py-2 rounded-xl text-xs font-semibold">Publicar Vehículo</button>
+                            <button onclick="staffAddCar()" class="w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Publicar Vehículo</button>
                         </div>
                     </div>
                 </div>
@@ -366,7 +371,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="glass-bg py-4 px-4 text-center text-xs text-gray-300 mt-8 border-t border-white/20">
+    <footer class="glass-bg py-4 px-4 text-center text-xs text-gray-500 mt-8">
         <p>&copy; 2026 Arica Chile Roleplay. Todos los derechos reservados.</p>
     </footer>
 
@@ -393,9 +398,9 @@
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.getElementById(`tab-${tabId}`).classList.remove('hidden');
 
-            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('bg-white/30', 'border-white'));
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('bg-white/20', 'border-white/40'));
             const activeBtn = document.getElementById(`btn-${tabId}`);
-            if(activeBtn) activeBtn.classList.add('bg-white/30', 'border-white');
+            if(activeBtn) activeBtn.classList.add('bg-white/20', 'border-white/40');
 
             if(tabId === 'dealership') renderDealership();
         }
@@ -444,22 +449,21 @@
 
             appState.characters.forEach((char, index) => {
                 container.innerHTML += `
-                    <div class="glass-card p-5 rounded-2xl border border-white/30 relative overflow-hidden flex flex-col justify-between shadow-xl"
-                         style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(30, 41, 59, 0.9)), url('2364562937_2534724415_1788711361325.jpg'); background-size: cover; background-position: center;">
+                    <div class="glass-card p-5 rounded-2xl relative overflow-hidden flex flex-col justify-between bg-gradient-to-br from-zinc-900/90 to-black/90 border border-white/10">
                         <div class="flex justify-between items-start">
                             <div>
-                                <span class="text-[10px] text-gray-300 uppercase tracking-widest">República de Chile • Arica RP</span>
-                                <h4 class="text-base font-black text-white">${char.name} ${char.lastname}</h4>
+                                <span class="text-[9px] text-gray-500 uppercase tracking-widest">República de Chile • Arica RP</span>
+                                <h4 class="text-sm font-black text-white mt-0.5">${char.name} ${char.lastname}</h4>
                             </div>
-                            <img src="arica logo.png" class="w-10 h-10 rounded-full object-cover border border-white/50 shadow">
+                            <img src="arica logo.png" class="w-8 h-8 rounded-full object-cover border border-white/30">
                         </div>
-                        <div class="grid grid-cols-2 gap-2 my-4 text-xs text-gray-200">
+                        <div class="grid grid-cols-2 gap-2 my-4 text-[11px] text-gray-300">
                             <p><b>DNI:</b> ${char.id}</p>
                             <p><b>Edad:</b> ${char.age} años</p>
                             <p><b>Género:</b> ${char.gender}</p>
-                            <p><b>Estado:</b> <span class="text-emerald-300 font-semibold">${char.criminalStatus}</span></p>
+                            <p><b>Estado:</b> <span class="text-emerald-400 font-semibold">${char.criminalStatus}</span></p>
                         </div>
-                        <div class="text-right text-[10px] text-gray-400 font-mono">PJ #${index + 1} Registrado</div>
+                        <div class="text-right text-[9px] text-gray-500 font-mono">PJ #${index + 1} Registrado</div>
                     </div>
                 `;
             });
@@ -475,8 +479,8 @@
             history.innerHTML = '';
             appState.transactions.forEach(tx => {
                 history.innerHTML += `
-                    <div class="flex justify-between items-center p-2 rounded-lg bg-white/5 border border-white/10 text-xs">
-                        <span class="text-gray-200">${tx.text}</span>
+                    <div class="flex justify-between items-center p-2 rounded-lg bg-white/[0.02] border border-white/5 text-[11px]">
+                        <span class="text-gray-300">${tx.text}</span>
                         <span class="${tx.type === 'income' ? 'text-emerald-400' : 'text-rose-400'} font-bold">${tx.amount}</span>
                     </div>
                 `;
@@ -506,12 +510,12 @@
             grid.innerHTML = '';
             appState.cars.forEach(car => {
                 grid.innerHTML += `
-                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between border border-white/20">
+                    <div class="glass-card p-4 rounded-xl flex flex-col justify-between">
                         <div>
-                            <h3 class="font-bold text-white text-center text-sm">${car.name}</h3>
-                            <p class="text-xs text-gray-300 mt-1 text-center font-semibold text-emerald-400">$${car.price.toLocaleString('es-CL')} CLP</p>
+                            <h3 class="font-bold text-white text-center text-xs">${car.name}</h3>
+                            <p class="text-xs text-emerald-400 mt-1 text-center font-semibold">$${car.price.toLocaleString('es-CL')} CLP</p>
                         </div>
-                        <button onclick="buyCar('${car.name}', ${car.price})" class="mt-4 w-full glass-btn py-2 rounded-xl text-xs font-semibold">Comprar Vehículo</button>
+                        <button onclick="buyCar('${car.name}', ${car.price})" class="mt-4 w-full glass-btn py-2 rounded-xl text-[11px] font-semibold">Comprar Vehículo</button>
                     </div>
                 `;
             });
@@ -552,7 +556,7 @@
             const inv = document.getElementById('user-inventory');
             inv.innerHTML = '';
             appState.inventory.forEach(item => {
-                inv.innerHTML += `<span class="px-3 py-1 bg-white/20 rounded-lg text-xs text-white border border-white/30 font-medium">${item}</span>`;
+                inv.innerHTML += `<span class="px-3 py-1 bg-white/10 rounded-lg text-[11px] text-white border border-white/20 font-medium">${item}</span>`;
             });
         }
 
@@ -574,30 +578,30 @@
             if(appName === 'aricagram') {
                 appTitle.innerText = "AricaGram";
                 appContent.innerHTML = `
-                    <div class="bg-slate-900/80 p-2 rounded-xl border border-white/10">
-                        <p class="font-bold text-[11px] text-amber-400">@carlos_arica</p>
-                        <p class="text-[10px] text-gray-200 mt-1">Disfrutando el atardecer en el Morro de Arica</p>
+                    <div class="bg-zinc-900/80 p-2.5 rounded-xl border border-white/5">
+                        <p class="font-bold text-[10px] text-amber-400">@carlos_arica</p>
+                        <p class="text-[10px] text-gray-300 mt-1">Disfrutando el atardecer en el Morro de Arica</p>
                     </div>
                 `;
             } else if(appName === 'chat') {
                 appTitle.innerText = "Mensajes";
                 appContent.innerHTML = `
-                    <div class="p-2 rounded-lg bg-blue-900/40 text-[11px]"><b>Soporte Arica RP:</b> ¡Bienvenido al servidor!</div>
+                    <div class="p-2.5 rounded-lg bg-blue-950/40 border border-blue-900/30 text-[10px]"><b>Soporte Arica RP:</b> ¡Bienvenido al servidor!</div>
                 `;
             } else if(appName === 'bank') {
                 appTitle.innerText = "BancaApp";
                 appContent.innerHTML = `
-                    <div class="p-3 rounded-xl bg-gradient-to-r from-blue-900 to-indigo-900 text-center">
-                        <p class="text-[10px] text-gray-300">Saldo Disponible</p>
-                        <p class="text-base font-black text-white">$${appState.balance.toLocaleString('es-CL')} CLP</p>
+                    <div class="p-3 rounded-xl bg-gradient-to-r from-zinc-900 to-black text-center border border-white/10">
+                        <p class="text-[9px] text-gray-500">Saldo Disponible</p>
+                        <p class="text-sm font-black text-white mt-0.5">$${appState.balance.toLocaleString('es-CL')} CLP</p>
                     </div>
                 `;
             } else if(appName === 'emergency') {
                 appTitle.innerText = "Emergencias";
                 appContent.innerHTML = `
                     <div class="space-y-2">
-                        <button onclick="alert('Llamada enviada a Carabineros.')" class="w-full py-2 bg-blue-600/80 rounded-lg text-white font-bold text-[11px]">Llamar a Carabineros</button>
-                        <button onclick="alert('Llamada enviada al SAMU.')" class="w-full py-2 bg-red-600/80 rounded-lg text-white font-bold text-[11px]">Llamar a Ambulancia</button>
+                        <button onclick="alert('Llamada enviada a Carabineros.')" class="w-full py-2 bg-blue-900/60 hover:bg-blue-900 rounded-lg text-white font-bold text-[10px] border border-blue-500/30">Llamar a Carabineros</button>
+                        <button onclick="alert('Llamada enviada al SAMU.')" class="w-full py-2 bg-rose-900/60 hover:bg-rose-900 rounded-lg text-white font-bold text-[10px] border border-rose-500/30">Llamar a Ambulancia</button>
                     </div>
                 `;
             }
@@ -639,14 +643,14 @@
 
             found.forEach(char => {
                 resultBox.innerHTML += `
-                    <div class="glass-card p-4 rounded-xl space-y-2 border border-white/20">
+                    <div class="glass-card p-4 rounded-xl space-y-2">
                         <div class="flex justify-between items-center">
-                            <h4 class="font-bold text-white text-sm">${char.name} ${char.lastname} (${char.id})</h4>
-                            <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-400/30">${char.criminalStatus}</span>
+                            <h4 class="font-bold text-white text-xs">${char.name} ${char.lastname} (${char.id})</h4>
+                            <span class="px-2 py-0.5 rounded text-[9px] font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">${char.criminalStatus}</span>
                         </div>
-                        <div class="flex gap-2 pt-2">
-                            <button onclick="policeAddFine('${char.id}')" class="glass-btn px-3 py-1 rounded text-xs text-amber-300">Poner Multa ($50k)</button>
-                            <button onclick="policeToggleWanted('${char.id}')" class="glass-btn px-3 py-1 rounded text-xs text-rose-300">Cambiar Estado</button>
+                        <div class="flex gap-2 pt-1">
+                            <button onclick="policeAddFine('${char.id}')" class="glass-btn px-3 py-1 rounded text-[11px] text-amber-400">Poner Multa ($50k)</button>
+                            <button onclick="policeToggleWanted('${char.id}')" class="glass-btn px-3 py-1 rounded text-[11px] text-rose-400">Cambiar Estado</button>
                         </div>
                     </div>
                 `;
