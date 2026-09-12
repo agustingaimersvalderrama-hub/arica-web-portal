@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arica Chile Roleplay - Portal Web</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['Courier New', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #000;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), url('2364562937_2534724415_1788711361325.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #e2e8f0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        /* Tema de Cristal Minimalista Blanco */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+            outline: none;
+            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+        }
+
+        .glass-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .glass-button:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+        }
+
+        .glass-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Animaciones de Pestañas */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Navegación */
+        .nav-btn {
+            position: relative;
+        }
+        
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+
+        .nav-btn.active {
+            color: white;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .nav-btn.active::after {
+            width: 100%;
+        }
+
+        /* Notificaciones customizadas */
+        #notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #notification.show {
+            transform: translateX(0);
+        }
+
+        /* Tarjeta de crédito UI */
+        .credit-card {
+            background-color: #111;
+            overflow: hidden;
+        }
+        .cc-bg {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('2364562937_2534724415_1788711361325.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 0;
+        }
+        .cc-gradient {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(255,255,255,0.1) 100%);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="flex flex-col font-sans antialiased">
+
+    <header class="glass-panel sticky top-0 z-40 border-b border-white/20 rounded-none bg-black/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-4">
+                    <img src="arica logo.png" alt="Arica RP Logo" class="h-14 w-14 rounded-full border-2 border-white shadow-[0_0_15px_rgba(255,255,255,0.5)] object-cover bg-black">
+                    <div>
+                        <h1 class="text-xl font-bold tracking-tight text-white uppercase">Arica Chile <span class="text-white/70 font-light">RP</span></h1>
+                        <p class="text-xs text-white/50 tracking-widest uppercase">Portal Oficial</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-6 h-full items-center">
+                    <button onclick="switchTab('identidad')" id="btn-identidad" class="nav-btn active h-full px-3 text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center">
+                        <i class="fas fa-id-card mr-2"></i> Identidad
+                    </button>
+                    <button onclick="switchTab('economia')" id="btn-economia" class="nav-btn h-full px-3 text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center">
+                        <i class="fas fa-university mr-2"></i> Economía
+                    </button>
+                    <button onclick="switchTab('concesionario')" id="btn-concesionario" class="nav-btn h-full px-3 text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center">
+                        <i class="fas fa-car mr-2"></i> Concesionario
+                    </button>
+                    <button onclick="switchTab('staff')" id="btn-staff" class="nav-btn h-full px-3 text-sm font-medium text-gray-400 hover:text-white transition-colors flex items-center border-l border-white/20 pl-6 ml-2">
+                        <i class="fas fa-shield-alt mr-2 text-white/50"></i> Staff
+                    </button>
+                </nav>
+
+                <!-- Status -->
+                <div class="hidden sm:flex items-center gap-3 pl-4">
+                    <div class="text-right">
+                        <div class="text-sm font-bold text-white uppercase" id="nav-username">Invitado</div>
+                        <div class="text-xs text-white/50 tracking-widest" id="nav-status">Sin Registro</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Nav -->
+        <div class="md:hidden border-t border-white/20 flex justify-around bg-black/60 backdrop-blur-md">
+             <button onclick="switchTab('identidad')" id="btn-identidad-mobile" class="nav-btn active flex-1 py-4 text-xs font-medium text-white flex flex-col items-center gap-1">
+                <i class="fas fa-id-card text-lg"></i> ID
+            </button>
+            <button onclick="switchTab('economia')" id="btn-economia-mobile" class="nav-btn flex-1 py-4 text-xs font-medium text-gray-400 flex flex-col items-center gap-1">
+                <i class="fas fa-university text-lg"></i> Banco
+            </button>
+            <button onclick="switchTab('concesionario')" id="btn-concesionario-mobile" class="nav-btn flex-1 py-4 text-xs font-medium text-gray-400 flex flex-col items-center gap-1">
+                <i class="fas fa-car text-lg"></i> Autos
+            </button>
+            <button onclick="switchTab('staff')" id="btn-staff-mobile" class="nav-btn flex-1 py-4 text-xs font-medium text-gray-400 flex flex-col items-center gap-1">
+                <i class="fas fa-shield-alt text-lg"></i> Staff
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full relative z-10">
+        
+        <section id="identidad" class="tab-content active">
+            <!-- Formulario DNI -->
+            <div id="dni-form-container" class="max-w-xl mx-auto mt-4">
+                <div class="glass-panel p-8 sm:p-10 rounded-3xl text-center relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
+                        <img src="arica logo.png" class="w-40 h-40 object-cover rounded-full grayscale">
+                    </div>
+                    
+                    <div class="relative z-10 mb-8">
+                        <h2 class="text-3xl font-bold text-white mb-2 uppercase tracking-widest">Crear Identidad</h2>
+                        <p class="text-white/60 text-sm">Bienvenido a Arica. Registra tu DNI para recibir el bono inicial de <strong class="text-white font-mono">$800.000 CLP</strong>.</p>
+                    </div>
+
+                    <form id="registro-dni" class="space-y-5 text-left relative z-10">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Nombre</label>
+                                <input type="text" id="reg-nombre" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="Ej. Juan">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Apellido</label>
+                                <input type="text" id="reg-apellido" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="Ej. Pérez">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Edad</label>
+                                <input type="number" id="reg-edad" min="18" max="90" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="18+">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Género</label>
+                                <select id="reg-genero" required class="glass-input w-full px-4 py-3 rounded-xl text-sm appearance-none bg-black/50">
+                                    <option value="" disabled selected>Elegir</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="F">Femenino</option>
+                                    <option value="O">Otro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Nacionalidad</label>
+                                <input type="text" id="reg-nacionalidad" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="Chileno">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="glass-button w-full py-4 rounded-xl text-sm uppercase tracking-widest font-bold mt-4 flex justify-center items-center gap-2">
+                            <i class="fas fa-fingerprint"></i> Emitir DNI
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Carnet DNI -->
+            <div id="dni-card-container" style="display: none;" class="max-w-3xl mx-auto">
+                <div class="glass-panel p-2 rounded-2xl relative overflow-hidden">
+                    <div class="absolute inset-0 bg-white/5 pointer-events-none"></div>
+                    <div class="bg-black/40 rounded-xl p-8 flex flex-col md:flex-row gap-8 relative z-10 border border-white/10 backdrop-blur-md">
+                        <div class="flex-shrink-0 flex flex-col items-center justify-center space-y-4">
+                            <div class="w-36 h-36 rounded-xl border-2 border-white/30 overflow-hidden relative shadow-2xl">
+                                <img src="https://ui-avatars.com/api/?name=User&background=000000&color=fff&size=150" id="dni-avatar" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 border border-white/20 rounded-xl"></div>
+                            </div>
+                            <img src="arica logo.png" class="w-12 h-12 object-cover rounded-full opacity-80 mt-2">
+                        </div>
+                        <div class="flex-grow">
+                            <div class="border-b border-white/20 pb-4 mb-6">
+                                <h3 class="text-3xl font-bold text-white uppercase tracking-widest" id="dni-fullname">---</h3>
+                                <p class="text-xs text-white/50 font-light mt-1 tracking-widest uppercase">República de Chile - DNI</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-6">
+                                <div>
+                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">RUN</p>
+                                    <p class="text-lg font-mono text-white" id="dni-run">---</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">Nacionalidad</p>
+                                    <p class="text-lg text-white uppercase" id="dni-nac">---</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">Edad</p>
+                                    <p class="text-lg text-white" id="dni-age">---</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">Género</p>
+                                    <p class="text-lg text-white" id="dni-gender">---</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="economia" class="tab-content">
+            <h2 class="text-2xl font-bold mb-8 text-white uppercase tracking-widest text-center"><i class="fas fa-university text-white/50 mr-2"></i> Banco Digital Arica</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-8 justify-center items-start">
+                
+                <!-- Tarjeta Arica Banco -->
+                <div class="w-full lg:w-auto flex justify-center">
+                    <div class="credit-card relative w-full max-w-md h-56 rounded-2xl border border-white/40 shadow-[0_10px_40px_rgba(0,0,0,0.8)] p-6 flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
+                        <div class="cc-bg"></div>
+                        <div class="cc-gradient"></div>
+                        
+                        <div class="relative z-10 flex justify-between items-start">
+                            <div class="flex items-center gap-3">
+                                <img src="arica logo.png" class="w-10 h-10 rounded-full border border-white/50 object-cover bg-black shadow-lg">
+                                <span class="text-white font-bold tracking-widest uppercase text-sm drop-shadow-md">Arica Banco</span>
+                            </div>
+                            <i class="fas fa-wifi text-white/70 rotate-90 text-lg"></i>
+                        </div>
+                        
+                        <div class="relative z-10 mt-4">
+                            <div class="w-12 h-8 bg-gradient-to-br from-white/40 to-white/10 rounded border border-white/30 mb-3 backdrop-blur-sm"></div>
+                            <div class="flex justify-between items-center mb-1">
+                                <p class="text-xs text-white/70 uppercase tracking-widest drop-shadow-md">Saldo Disponible</p>
+                                <i class="fab fa-cc-visa text-3xl text-white/80"></i>
+                            </div>
+                            <div class="text-3xl text-white font-mono tracking-wider drop-shadow-lg font-bold" id="card-balance">$0</div>
+                            <div class="flex justify-between items-end mt-4">
+                                <div class="text-white/90 uppercase text-sm tracking-widest font-medium drop-shadow-md" id="card-name">SIN REGISTRO</div>
+                                <div class="text-white/70 text-xs font-mono drop-shadow-md">12/30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opciones Bancarias -->
+                <div class="w-full lg:w-1/2 glass-panel p-6 rounded-2xl flex flex-col gap-4">
+                    <h3 class="text-white uppercase tracking-widest text-sm border-b border-white/20 pb-3 mb-2">Operaciones</h3>
+                    
+                    <button onclick="openBankModal('transferir')" class="glass-button w-full p-4 rounded-xl flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                                <i class="fas fa-exchange-alt text-white"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-white font-bold text-sm">Transferir</p>
+                                <p class="text-white/50 text-xs">Enviar dinero a otro ciudadano</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-white/30 group-hover:text-white transition-colors"></i>
+                    </button>
+
+                    <button onclick="openBankModal('depositar')" class="glass-button w-full p-4 rounded-xl flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                                <i class="fas fa-arrow-down text-white"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-white font-bold text-sm">Depositar</p>
+                                <p class="text-white/50 text-xs">Ingresar efectivo a tu cuenta</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-white/30 group-hover:text-white transition-colors"></i>
+                    </button>
+
+                    <button onclick="openBankModal('retirar')" class="glass-button w-full p-4 rounded-xl flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                                <i class="fas fa-arrow-up text-white"></i>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-white font-bold text-sm">Retirar</p>
+                                <p class="text-white/50 text-xs">Sacar efectivo del cajero</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-right text-white/30 group-hover:text-white transition-colors"></i>
+                    </button>
+                    
+                    <div class="mt-4 p-4 rounded-xl bg-black/40 border border-white/10 flex justify-between items-center">
+                        <span class="text-xs text-white/50 uppercase tracking-widest">Efectivo en mano</span>
+                        <span class="text-lg text-white font-mono font-bold" id="cash-balance">$0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="concesionario" class="tab-content">
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-bold text-white uppercase tracking-widest"><i class="fas fa-car-alt text-white/50 mr-2"></i> Importaciones Arica</h2>
+                <p class="text-sm text-white/50 mt-2">Catálogo de vehículos disponibles</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="dealership-grid">
+                <!-- Generado por JS -->
+            </div>
+        </section>
+
+        <section id="staff" class="tab-content">
+            <!-- Login Staff -->
+            <div id="staff-login" class="max-w-md mx-auto mt-10 glass-panel p-8 rounded-3xl text-center border-t-4 border-t-white">
+                <i class="fas fa-shield-alt text-4xl text-white mb-4 drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]"></i>
+                <h2 class="text-xl font-bold text-white uppercase tracking-widest mb-6">Portal Administrativo</h2>
+                
+                <form id="form-staff-login" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Usuario</label>
+                        <input type="text" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" value="Admin" readonly>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest text-white/50 mb-1">Contraseña</label>
+                        <input type="password" id="staff-pass" required class="glass-input w-full px-4 py-3 rounded-xl text-sm" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="glass-button w-full py-3 rounded-xl text-sm font-bold uppercase tracking-widest mt-2">
+                        Acceder
+                    </button>
+                </form>
+            </div>
+
+            <!-- Panel Staff (Dashboard) -->
+            <div id="staff-dashboard" class="hidden">
+                <div class="flex justify-between items-center mb-8 border-b border-white/20 pb-4">
+                    <h2 class="text-2xl font-bold text-white uppercase tracking-widest"><i class="fas fa-cogs text-white/50 mr-2"></i> Panel de Control</h2>
+                    <button onclick="logoutStaff()" class="text-xs text-white/50 hover:text-white uppercase tracking-widest"><i class="fas fa-sign-out-alt"></i> Salir</button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Control Economía -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-white uppercase tracking-widest text-sm font-bold border-b border-white/20 pb-3 mb-5"><i class="fas fa-money-bill-wave mr-2"></i> Modificar Economía Local</h3>
+                        
+                        <div class="bg-black/30 p-4 rounded-xl border border-white/10 mb-4">
+                            <p class="text-xs text-white/50 uppercase tracking-widest mb-1">Jugador Actual</p>
+                            <p class="text-lg text-white font-bold" id="staff-target-name">Nadie conectado</p>
+                            <p class="text-xs text-white/70 font-mono" id="staff-target-balance">Banco: $0</p>
+                        </div>
+
+                        <div class="flex gap-2 mb-4">
+                            <input type="number" id="staff-money-input" class="glass-input flex-1 px-4 py-2 rounded-xl text-sm" placeholder="Monto ej. 50000">
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="staffModifyMoney('add')" class="glass-button flex-1 py-2 rounded-xl text-sm font-bold flex justify-center items-center gap-2">
+                                <i class="fas fa-plus"></i> Dar
+                            </button>
+                            <button onclick="staffModifyMoney('remove')" class="glass-button flex-1 py-2 rounded-xl text-sm font-bold flex justify-center items-center gap-2">
+                                <i class="fas fa-minus"></i> Quitar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Control Concesionario -->
+                    <div class="glass-panel p-6 rounded-2xl">
+                        <h3 class="text-white uppercase tracking-widest text-sm font-bold border-b border-white/20 pb-3 mb-5"><i class="fas fa-car mr-2"></i> Gestionar Concesionario</h3>
+                        
+                        <form id="form-add-car" class="space-y-3 mb-6 bg-black/30 p-4 rounded-xl border border-white/10">
+                            <p class="text-xs text-white/50 uppercase tracking-widest mb-2 border-b border-white/10 pb-1">Agregar Vehículo</p>
+                            <div>
+                                <input type="text" id="car-name" required class="glass-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Nombre del vehículo (Ej. Zentorno)">
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="number" id="car-price" required class="glass-input w-full px-3 py-2 rounded-lg text-xs" placeholder="Precio ($)">
+                                <input type="text" id="car-img" required class="glass-input w-full px-3 py-2 rounded-lg text-xs" placeholder="URL Imagen">
+                            </div>
+                            <button type="submit" class="glass-button w-full py-2 rounded-lg text-xs font-bold uppercase">
+                                Añadir al catálogo
+                            </button>
+                        </form>
+
+                        <div>
+                            <p class="text-xs text-white/50 uppercase tracking-widest mb-2 border-b border-white/10 pb-1">Catálogo Actual</p>
+                            <div id="staff-car-list" class="space-y-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
+                                <!-- Generado por JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    
+    <!-- Modal Banco -->
+    <div id="bank-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center backdrop-blur-md">
+        <div class="glass-panel p-8 rounded-2xl w-full max-w-sm text-center border-t-2 border-t-white">
+            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-4 border border-white/30">
+                <i id="bm-icon" class="fas fa-exchange-alt text-white text-xl"></i>
+            </div>
+            <h3 id="bm-title" class="text-lg text-white uppercase tracking-widest font-bold mb-1">Acción</h3>
+            <p id="bm-desc" class="text-xs text-white/50 mb-6">Detalle de la operación</p>
+            
+            <input type="number" id="bm-input" class="glass-input w-full p-4 rounded-xl mb-6 text-center text-lg font-mono font-bold" placeholder="$0">
+            
+            <div class="flex gap-4">
+                <button onclick="closeBankModal()" class="glass-button flex-1 py-3 rounded-xl text-sm uppercase tracking-widest">Cancelar</button>
+                <button id="bm-confirm" class="glass-button flex-1 py-3 rounded-xl border-white font-bold text-white text-sm uppercase tracking-widest bg-white/10">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación -->
+    <div id="notification" class="glass-panel p-4 rounded-xl border-l-2 border-l-white flex items-center gap-4 bg-black/60">
+        <div class="bg-white/20 w-8 h-8 rounded-full flex items-center justify-center text-white">
+            <i class="fas fa-check text-sm"></i>
+        </div>
+        <div>
+            <p id="notif-msg" class="text-white text-xs tracking-wide">Acción completada.</p>
+        </div>
+    </div>
+
+    <script>
+        // --- ESTADO DE LA APLICACIÓN ---
+        let appState = {
+            user: {
+                name: 'INVITADO',
+                fullName: 'Invitado',
+                bank: 0,
+                cash: 0,
+                registered: false
+            },
+            isStaff: false,
+            cars: [
+                { id: 1, name: 'Pegassi Zentorno', price: 8500000, img: 'https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=800&auto=format&fit=crop' },
+                { id: 2, name: 'Karin Sultan', price: 1200000, img: 'https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=800&auto=format&fit=crop' },
+                { id: 3, name: 'Shitzu Hakuchou', price: 650000, img: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?q=80&w=800&auto=format&fit=crop' }
+            ],
+            currentBankAction: null
+        };
+
+        // Utilidad: Formatear Moneda
+        const formatMoney = (amount) => {
+            return '$' + amount.toLocaleString('es-CL');
+        };
+
+        // --- SISTEMA DE PESTAÑAS ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-white');
+                btn.classList.add('text-gray-400');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            
+            // Activar botones (Desktop y Mobile)
+            const dBtn = document.getElementById('btn-' + tabId);
+            if(dBtn) { dBtn.classList.add('active', 'text-white'); dBtn.classList.remove('text-gray-400'); }
+            
+            const mBtn = document.getElementById('btn-' + tabId + '-mobile');
+            if(mBtn) { mBtn.classList.add('active', 'text-white'); mBtn.classList.remove('text-gray-400'); }
+        }
+
+        function showNotification(message) {
+            const notif = document.getElementById('notification');
+            document.getElementById('notif-msg').textContent = message;
+            notif.classList.add('show');
+            setTimeout(() => notif.classList.remove('show'), 3500);
+        }
+
+        // --- IDENTIDAD Y REGISTRO ---
+        document.getElementById('registro-dni').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('reg-nombre').value;
+            const apellido = document.getElementById('reg-apellido').value;
+            const fullName = `${nombre} ${apellido}`;
+            
+            // Generar Datos Falsos
+            const runStr = `${Math.floor(10+Math.random()*15)}.${Math.floor(100+Math.random()*899)}.${Math.floor(100+Math.random()*899)}-${Math.floor(Math.random()*10)}`;
+            
+            // Actualizar Estado
+            appState.user.name = (nombre.charAt(0) + ' ' + apellido).toUpperCase();
+            appState.user.fullName = fullName;
+            appState.user.bank = 800000;
+            appState.user.registered = true;
+
+            // Renderizar Carnet
+            document.getElementById('dni-fullname').textContent = fullName;
+            document.getElementById('dni-run').textContent = runStr;
+            document.getElementById('dni-age').textContent = document.getElementById('reg-edad').value;
+            document.getElementById('dni-gender').textContent = document.getElementById('reg-genero').value === 'M' ? 'Masculino' : (document.getElementById('reg-genero').value === 'F' ? 'Femenino' : 'Otro');
+            document.getElementById('dni-nac').textContent = document.getElementById('reg-nacionalidad').value;
+            document.getElementById('dni-avatar').src = `https://ui-avatars.com/api/?name=${encodeURIComponent(nombre)}+${encodeURIComponent(apellido)}&background=000000&color=fff&size=150`;
+
+            // Actualizar Vistas Generales
+            document.getElementById('dni-form-container').style.display = 'none';
+            document.getElementById('dni-card-container').style.display = 'block';
+            
+            document.getElementById('nav-username').textContent = nombre;
+            document.getElementById('nav-status').textContent = 'Ciudadano';
+            document.getElementById('nav-status').classList.remove('text-white/50');
+            document.getElementById('nav-status').classList.add('text-white');
+
+            updateEconomyUI();
+            showNotification(`DNI emitido. Recibiste $800.000 CLP de bono.`);
+        });
+
+        // --- ECONOMÍA (BANCO DIGITAL) ---
+        function updateEconomyUI() {
+            document.getElementById('card-balance').textContent = formatMoney(appState.user.bank);
+            document.getElementById('card-name').textContent = appState.user.name;
+            document.getElementById('cash-balance').textContent = formatMoney(appState.user.cash);
+            
+            // Actualizar vista del staff si está conectado
+            document.getElementById('staff-target-name').textContent = appState.user.registered ? appState.user.fullName : 'Sin registrar';
+            document.getElementById('staff-target-balance').textContent = `Banco: ${formatMoney(appState.user.bank)} | Efectivo: ${formatMoney(appState.user.cash)}`;
+        }
+
+        function openBankModal(action) {
+            if(!appState.user.registered) {
+                showNotification("Debes registrar tu DNI primero.");
+                return;
+            }
+            appState.currentBankAction = action;
+            const modal = document.getElementById('bank-modal');
+            const title = document.getElementById('bm-title');
+            const desc = document.getElementById('bm-desc');
+            const icon = document.getElementById('bm-icon');
+            const input = document.getElementById('bm-input');
+
+            input.value = '';
+            
+            if(action === 'transferir') {
+                title.textContent = 'Transferencia';
+                desc.textContent = 'Ingresa el monto a transferir de tu cuenta bancaria.';
+                icon.className = 'fas fa-exchange-alt text-white text-xl';
+            } else if (action === 'depositar') {
+                title.textContent = 'Depositar Efectivo';
+                desc.textContent = 'Ingresa el monto en efectivo que deseas guardar en el banco.';
+                icon.className = 'fas fa-arrow-down text-white text-xl';
+            } else if (action === 'retirar') {
+                title.textContent = 'Retirar Efectivo';
+                desc.textContent = 'Ingresa el monto a retirar de tu cuenta bancaria.';
+                icon.className = 'fas fa-arrow-up text-white text-xl';
+            }
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            input.focus();
+        }
+
+        function closeBankModal() {
+            const modal = document.getElementById('bank-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            appState.currentBankAction = null;
+        }
+
+        document.getElementById('bm-confirm').addEventListener('click', () => {
+            const amount = parseInt(document.getElementById('bm-input').value);
+            if(isNaN(amount) || amount <= 0) {
+                showNotification("Monto inválido.");
+                return;
+            }
+
+            if(appState.currentBankAction === 'transferir') {
+                if(amount > appState.user.bank) return showNotification("Fondos insuficientes en el banco.");
+                appState.user.bank -= amount;
+                showNotification(`Transferencia de ${formatMoney(amount)} exitosa.`);
+            } else if(appState.currentBankAction === 'depositar') {
+                if(amount > appState.user.cash) return showNotification("No tienes suficiente efectivo.");
+                appState.user.cash -= amount;
+                appState.user.bank += amount;
+                showNotification(`Depositaste ${formatMoney(amount)}.`);
+            } else if(appState.currentBankAction === 'retirar') {
+                if(amount > appState.user.bank) return showNotification("Fondos insuficientes en el banco.");
+                appState.user.bank -= amount;
+                appState.user.cash += amount;
+                showNotification(`Retiraste ${formatMoney(amount)}.`);
+            }
+
+            updateEconomyUI();
+            closeBankModal();
+        });
+
+
+        // --- CONCESIONARIO ---
+        function renderDealership() {
+            const grid = document.getElementById('dealership-grid');
+            grid.innerHTML = '';
+            
+            if(appState.cars.length === 0) {
+                grid.innerHTML = '<p class="text-white/50 col-span-full text-center py-10 uppercase tracking-widest text-xs">No hay vehículos en stock</p>';
+                return;
+            }
+
+            appState.cars.forEach(car => {
+                grid.innerHTML += `
+                    <div class="glass-panel rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform duration-300 border border-white/10 flex flex-col">
+                        <div class="h-48 overflow-hidden relative bg-black">
+                            <img src="${car.img}" alt="${car.name}" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" onerror="this.src='https://placehold.co/600x400/111/fff?text=No+Image'">
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="text-lg font-bold text-white mb-1 uppercase tracking-wider">${car.name}</h3>
+                                <p class="text-[10px] text-white/50 uppercase tracking-widest mb-4">Stock Limitado</p>
+                            </div>
+                            <div class="flex justify-between items-end border-t border-white/10 pt-4">
+                                <div>
+                                    <p class="text-[10px] text-white/40 uppercase tracking-widest mb-1">Valor</p>
+                                    <p class="text-xl font-bold font-mono text-white">${formatMoney(car.price)}</p>
+                                </div>
+                                <button onclick="buyCar(${car.price}, '${car.name}')" class="glass-button px-4 py-2 rounded-lg text-xs font-bold uppercase">
+                                    Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function buyCar(price, name) {
+            if(!appState.user.registered) return showNotification("Registra tu DNI primero.");
+            if(appState.user.bank >= price) {
+                appState.user.bank -= price;
+                updateEconomyUI();
+                showNotification(`Has comprado un ${name}.`);
+            } else {
+                showNotification("Fondos insuficientes en el banco.");
+            }
+        }
+
+
+        // --- PORTAL STAFF ---
+        document.getElementById('form-staff-login').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pass = document.getElementById('staff-pass').value;
+            if(pass === 'AricaWeb2026') {
+                appState.isStaff = true;
+                document.getElementById('staff-login').classList.add('hidden');
+                document.getElementById('staff-dashboard').classList.remove('hidden');
+                document.getElementById('staff-pass').value = '';
+                updateEconomyUI(); // update staff target view
+                renderStaffCars();
+                showNotification("Acceso Autorizado.");
+            } else {
+                showNotification("Contraseña incorrecta.");
+            }
+        });
+
+        function logoutStaff() {
+            appState.isStaff = false;
+            document.getElementById('staff-dashboard').classList.add('hidden');
+            document.getElementById('staff-login').classList.remove('hidden');
+            showNotification("Sesión cerrada.");
+        }
+
+        function staffModifyMoney(action) {
+            if(!appState.user.registered) return showNotification("El jugador no está registrado.");
+            
+            const input = document.getElementById('staff-money-input');
+            const amount = parseInt(input.value);
+            
+            if(isNaN(amount) || amount <= 0) return showNotification("Monto inválido.");
+
+            if(action === 'add') {
+                appState.user.bank += amount;
+                showNotification(`Se añadieron ${formatMoney(amount)} a la cuenta.`);
+            } else {
+                if(amount > appState.user.bank) appState.user.bank = 0;
+                else appState.user.bank -= amount;
+                showNotification(`Se quitaron fondos de la cuenta.`);
+            }
+            
+            input.value = '';
+            updateEconomyUI();
+        }
+
+        // Dealership Staff Control
+        document.getElementById('form-add-car').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('car-name').value;
+            const price = parseInt(document.getElementById('car-price').value);
+            const img = document.getElementById('car-img').value;
+
+            const newCar = {
+                id: Date.now(),
+                name: name,
+                price: price,
+                img: img
+            };
+
+            appState.cars.push(newCar);
+            document.getElementById('form-add-car').reset();
+            
+            renderStaffCars();
+            renderDealership();
+            showNotification("Vehículo añadido al catálogo.");
+        });
+
+        function renderStaffCars() {
+            const list = document.getElementById('staff-car-list');
+            list.innerHTML = '';
+            
+            if(appState.cars.length === 0) {
+                list.innerHTML = '<p class="text-xs text-white/50 italic">Sin vehículos.</p>';
+                return;
+            }
+
+            appState.cars.forEach(car => {
+                list.innerHTML += `
+                    <div class="flex justify-between items-center bg-black/20 p-2 rounded border border-white/10">
+                        <div>
+                            <p class="text-xs text-white uppercase">${car.name}</p>
+                            <p class="text-[10px] text-white/50 font-mono">${formatMoney(car.price)}</p>
+                        </div>
+                        <button onclick="deleteCar(${car.id})" class="text-white/50 hover:text-white p-2">
+                            <i class="fas fa-trash-alt text-xs"></i>
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteCar(id) {
+            appState.cars = appState.cars.filter(car => car.id !== id);
+            renderStaffCars();
+            renderDealership();
+            showNotification("Vehículo eliminado.");
+        }
+
+        // --- INICIALIZACIÓN ---
+        window.onload = () => {
+            renderDealership();
+            updateEconomyUI();
+        };
+
+    </script>
+</body>
+</html>
